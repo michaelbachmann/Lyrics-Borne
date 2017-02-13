@@ -36,4 +36,8 @@ export default class Styles {
     static bodyStyle = {
     	textAlign: "center"
     };
+    static wordCloudStyle = {
+        height: "470px",
+        width: "470px"
+    };
 }
