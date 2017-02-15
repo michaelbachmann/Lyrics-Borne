@@ -4,6 +4,8 @@ import { Link } from "react-router";
 
 export default class Layout extends React.Component {
 	render() {
+		const { location } = this.props;
+
 		return (
       <div class="container" style={Styles.bodyStyle}>
 				<div class="row">
