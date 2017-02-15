@@ -30,8 +30,9 @@ export default class Styles {
     };
     static inputStyle = {
     	margin:"0 auto",
-    	borderRadius: "50",
-    	width: "470px"
+    	borderRadius: "3",
+    	width: "470px",
+        border: "2px solid #653CE0"
     };
     static bodyStyle = {
     	textAlign: "center"
@@ -40,4 +41,11 @@ export default class Styles {
         height: "470px",
         width: "470px"
     };
+    static tableStyle = {
+        border: "2px solid #653CE0",
+        backgroundColor: "white",
+        width: "470px",
+        margin:"0 auto",
+        borderRadius: "3",
+    }
 }

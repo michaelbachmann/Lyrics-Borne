@@ -8,8 +8,23 @@ export default class SongList extends React.Component {
   	const word = query.word;
     return (
       <div>
-        <h1 style={Styles.titleStyle}>SongList</h1>
-      	<p>{word}</p>
+        <h1 style={Styles.titleStyle}>{word}</h1>
+
+      	<table class="table" style={Styles.tableStyle}>
+      		<tbody>
+      		<tr><td style={Styles.tableStyle}>One</td></tr>
+      		<tr><td style={Styles.tableStyle}>One</td></tr>
+      		<tr><td style={Styles.tableStyle}>One</td></tr>
+      		<tr><td style={Styles.tableStyle}>One</td></tr>
+      		<tr><td style={Styles.tableStyle}>One</td></tr>
+      		<tr><td style={Styles.tableStyle}>One</td></tr>
+      		</tbody>
+      	</table>
+
+      	<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => {this.props.history.push('/')}}>
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
+					</span>  Search
+				</button>
       </div>
     );
   }
