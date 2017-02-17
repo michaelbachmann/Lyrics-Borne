@@ -3,14 +3,15 @@ import dispatcher from "../dispatcher";
 
 class SongListStore extends EventEmitter {
 	constructor() {
-		super();
+		super()
 		this.songData = [
-			{ value: "Song 1", count: 8, { value: "Song 2", count: 5} }
-		];
+      { song: "jQuery", count: 25 }, { song: "MongoDB", count: 18 },
+      { song: "JavaScript", count: 38 }, { song: "React", count: 30 },
+    ];
 	}
 
 	getAllSongData() {
-		return this.wordData;
+		return this.songData;
 	}
 
 	handleActions(action) {
