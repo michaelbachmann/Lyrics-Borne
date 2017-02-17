@@ -14,7 +14,7 @@ ReactDOM.render(
     <Route path="/" component={Layout}>
 			<IndexRoute component={WordCloud}></IndexRoute>
 			<Route path="lyrics" component={Lyrics}></Route>
-			<Route path="songlist" component={SongList}></Route>
+			<Route path="songlist" name="" component={SongList}></Route>
     </Route>
   </Router>,
 app);
