@@ -44,7 +44,7 @@ export default class SongList extends React.Component {
     return (
       <div>
         <h1 style={Styles.titleStyle}>{word}</h1>
-        <table style={Styles.tableStyle}>{mappedSongData}</table>
+        <table style={Styles.tableStyle}><tbody>{mappedSongData}</tbody></table>
 
         <Link to={`/`}>
       	<button class="btn btn-lg" style={Styles.searchButtonStyle}>
