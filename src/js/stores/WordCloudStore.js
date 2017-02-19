@@ -6,7 +6,7 @@ class WordCloudStore extends EventEmitter {
 		super()
 		this.wordData = [
       { value: "jQuery", count: 25 }, { value: "MongoDB", count: 18 },
-      { value: "JavaScript", count: 38 }, { value: "React", count: 30 },
+      { value: "Flex", count: 38 }, { value: "React", count: 30 },
       { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 },
       { value: "HTML5", count: 33 }, { value: "CSS3", count: 20 },
       { value: "Webpack", count: 22 }, { value: "Babel.js", count: 7 },

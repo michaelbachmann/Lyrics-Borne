@@ -5,8 +5,8 @@ class SongListStore extends EventEmitter {
 	constructor() {
 		super()
 		this.songData = [
-      { song: "jQuery", count: 25 }, { song: "MongoDB", count: 18 },
-      { song: "JavaScript", count: 38 }, { song: "React", count: 30 },
+      { song: "Lose Yourself", count: 25 }, { song: "The Next Episode", count: 18 },
+      { song: "Go Flex", count: 38 }, { song: "Still DRE", count: 30 },
     ];
 	}
 

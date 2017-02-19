@@ -48,7 +48,11 @@ export default class Styles {
         margin:"0 auto",
         borderRadius: "3",
     }
-		static lyricsDivStyle = {
-			whiteSpace: "pre-line",
+		static lyricsStyle = {
+			backgroundColor: "#d3d3d3",
+			borderColor: "#d3d3d3",
+		}
+		static highlighter = {
+			backgroundColor: "#ffd54f"
 		}
 }

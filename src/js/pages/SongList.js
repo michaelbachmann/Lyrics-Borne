@@ -18,12 +18,10 @@ export default class SongList extends React.Component {
 
   componentWillMount() {
     SongListStore.on("change", this.getSongData);
-    // SongListStore.on("change", this.getWordTitle);
   }
 
   componentWillUnmount() {
     SongListStore.removeListener("change", this.getSongData);
-    // SongListStore.removeListener("change", this.getWordTitle);
   }
 
   getSongData() {
@@ -35,15 +33,13 @@ export default class SongList extends React.Component {
   reloadSongData() {
     SongActions.reloadSongData();
   }
-  //onClick={() => {this.props.history.push('/')}}
 
   render() {
   	const { query } = this.props.location;
   	const { params } = this.props;
   	const word = query.word;
-    // console.log(this.getWordTitle().bind(this));
     const { songData, title } = this.state;
-    const mappedSongData = songData.map((song, i) => <SongResults key={i} song={song.song} count={song.count}/> );
+    const mappedSongData = songData.map((song, i) => <SongResults key={i} song={song.song} count={song.count} word={params.word}/> );
 
     return (
       <div>
