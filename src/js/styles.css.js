@@ -34,7 +34,7 @@ export default class Styles {
     	width: "470px",
         border: "2px solid #653CE0"
     };
-    static bodyStyle = {
+    static centerAlignElements = {
     	textAlign: "center"
     };
     static wordCloudStyle = {
@@ -54,5 +54,8 @@ export default class Styles {
 		}
 		static highlighter = {
 			backgroundColor: "#ffd54f"
+		}
+		static leftAlignElements = {
+			textAlign: "left"
 		}
 }

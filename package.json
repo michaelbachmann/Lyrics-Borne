@@ -17,6 +17,7 @@
     "flux": "^2.1.1",
     "highlightable": "^1.0.4",
     "history": "^1.17.0",
+    "randomcolor": "^0.4.4",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-highlighter": "^0.3.3",

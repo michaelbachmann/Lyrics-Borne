@@ -7,7 +7,7 @@ export default class Layout extends React.Component {
 		const { location } = this.props;
 
 		return (
-      <div class="container" style={Styles.bodyStyle}>
+      <div class="container" style={Styles.centerAlignElements}>
 				<div class="row">
 					<div class="col-lg-12">
 						{this.props.children}

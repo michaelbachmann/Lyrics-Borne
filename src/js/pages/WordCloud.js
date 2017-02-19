@@ -4,6 +4,7 @@ import { TagCloud } from "react-tagcloud";
 import * as WordCloudActions from "../actions/WordCloudActions";
 import WordCloudStore from "../stores/WordCloudStore";
 import { Link, browserHistory } from 'react-router';
+import RandomColor from 'randomcolor';
 
 export default class WordCloud extends React.Component {
   constructor() {
@@ -11,7 +12,14 @@ export default class WordCloud extends React.Component {
   	this.getWordData = this.getWordData.bind(this);
   	this.state = {
   		wordData: WordCloudStore.getAllWordData(),
+      isGrayscale: false,
+      colorOpts: {
+        luminosity: 'dark',
+        format: 'rgba',
+        alpha: 0.5
+      }
   	};
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
@@ -32,14 +40,40 @@ export default class WordCloud extends React.Component {
   	WordCloudActions.reloadWordCloud();
   }
 
+  handleInputChange(event) {
+     const target = event.target;
+     const isGrayscale = target.type === 'checkbox' ? target.checked : target.value;
+     const name = target.name;
+     if (isGrayscale === false) {
+       this.setState({
+         isGrayscale: false,
+         colorOpts: {
+           luminosity: 'dark',
+           format: 'rgba',
+           alpha: 0.5
+         }
+       });
+     } else {
+       this.setState({
+         luminosity: 'light',
+         isGrayscale: true,
+         colorOpts: { hue: 'monochrome' }
+       });
+
+     }
+   }
+
   render() {
-    const { wordData } = this.state;
+    const { wordData, isColor, colorOpts } = this.state;
+    console.log(colorOpts);
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
-				<TagCloud minSize={12}
+
+        <TagCloud minSize={12}
             maxSize={35}
             tags={wordData}
+            colorOptions={colorOpts}
             onClick={
               (tag) => {
                 this.props.history.push({
@@ -49,9 +83,23 @@ export default class WordCloud extends React.Component {
               }
             }
         />
+
+        <form>
+        <label>
+          Grayscale:
+          <input
+            name="isGrayscale"
+            type="checkbox"
+            defaultChecked={isColor}
+            checked={this.state.isGrayscale}
+            onChange={this.handleInputChange} />
+        </label>
+        </form>
+
         <div class="input-group" style={Styles.inputStyle}>
 					<input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2"></input>
 				</div>
+
 				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={this.reloadWordCloud.bind(this)}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">
 					</span>  Search

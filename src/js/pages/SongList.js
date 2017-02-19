@@ -5,7 +5,6 @@ import { Link, browserHistory } from 'react-router';
 import SongResults from "../components/SongResults";
 import * as SongActions from "../actions/SongActions";
 import SongListStore from "../stores/SongListStore";
-import * as WordCloudActions from "../actions/WordCloudActions";
 
 export default class SongList extends React.Component {
   constructor() {

@@ -24,6 +24,7 @@ class WordCloudStore extends EventEmitter {
 	handleActions(action) {
 		switch(action.type) {
 			case "receive-word-cloud-data": {
+				console.log('RECEIVE WC DATA: ' + action.wordData[0].value);
 				this.wordData = action.wordData;
 				this.emit("change");
 				break;
