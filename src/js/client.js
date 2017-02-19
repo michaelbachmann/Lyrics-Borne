@@ -13,8 +13,8 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Layout}>
 			<IndexRoute component={WordCloud}></IndexRoute>
-			<Route path="lyrics" component={Lyrics}></Route>
-			<Route path="songlist" name="" component={SongList}></Route>
+			<Route path="lyrics(/:songID)" component={Lyrics}></Route>
+			<Route path="songlist(/:word)" name="" component={SongList}></Route>
     </Route>
   </Router>,
 app);

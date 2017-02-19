@@ -19,7 +19,7 @@ export default class WordCloud extends React.Component {
   }
 
   componentWillUnmount() {
-  	WordCloudStore.removeListener("change", this.getWordData);	
+  	WordCloudStore.removeListener("change", this.getWordData);
   }
 
   getWordData() {
@@ -40,10 +40,10 @@ export default class WordCloud extends React.Component {
 				<TagCloud minSize={12}
             maxSize={35}
             tags={wordData}
-            onClick={ 
+            onClick={
               (tag) => {
                 this.props.history.push({
-                  pathname: '/songlist',
+                  pathname: `/songlist/${tag.value}`,
                   search: `?word=${tag.value}`,
                 });
               }

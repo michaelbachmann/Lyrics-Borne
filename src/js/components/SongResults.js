@@ -1,9 +1,11 @@
 import React from "react";
+import { Link, browserHistory } from 'react-router';
 
 export default class SongResults extends React.Component {
   render() {
     const { count, song } = this.props;
     const songStr = ` ${song}`;
+    const urlStr = `/lyrics/${song}`;
 
     const rowStyle = {
     	paddingLeft: "3px"
@@ -19,10 +21,14 @@ export default class SongResults extends React.Component {
     	width: "40px",
     	borderBottom:"2px solid #653CE0",
     	padding: "5px"
-    };
+    }; // 607 672 32CL
     return (
     		<tr style={rowStyle}>
-        	<td style={songColumnStyle}>{songStr}</td>
+        	<td style={songColumnStyle}>
+                <Link to={urlStr}>
+                    {songStr}
+                    </Link>
+            </td>
         	<td style={countColumnStyle}>{count}</td>
         </tr>
     );

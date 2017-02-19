@@ -5,6 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import SongResults from "../components/SongResults";
 import * as SongActions from "../actions/SongActions";
 import SongListStore from "../stores/SongListStore";
+import * as WordCloudActions from "../actions/WordCloudActions";
 
 export default class SongList extends React.Component {
   constructor() {
@@ -17,29 +18,31 @@ export default class SongList extends React.Component {
 
   componentWillMount() {
     SongListStore.on("change", this.getSongData);
-
+    // SongListStore.on("change", this.getWordTitle);
   }
 
   componentWillUnmount() {
     SongListStore.removeListener("change", this.getSongData);
+    // SongListStore.removeListener("change", this.getWordTitle);
   }
 
   getSongData() {
     this.setState({
       songData: SongListStore.getAllSongData(),
-
     });
   }
 
   reloadSongData() {
     SongActions.reloadSongData();
   }
+  //onClick={() => {this.props.history.push('/')}}
 
   render() {
   	const { query } = this.props.location;
   	const { params } = this.props;
   	const word = query.word;
-    const { songData } = this.state;
+    // console.log(this.getWordTitle().bind(this));
+    const { songData, title } = this.state;
     const mappedSongData = songData.map((song, i) => <SongResults key={i} song={song.song} count={song.count}/> );
 
     return (
@@ -47,10 +50,12 @@ export default class SongList extends React.Component {
         <h1 style={Styles.titleStyle}>{word}</h1>
         <table style={Styles.tableStyle}>{mappedSongData}</table>
 
-      	<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => {this.props.history.push('/')}}>
+        <Link to={`/`}>
+      	<button class="btn btn-lg" style={Styles.searchButtonStyle}>
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
 					</span>  Search
 				</button>
+        </Link>
       </div>
     );
   }

@@ -48,4 +48,7 @@ export default class Styles {
         margin:"0 auto",
         borderRadius: "3",
     }
+		static lyricsDivStyle = {
+			whiteSpace: "pre-line",
+		}
 }
