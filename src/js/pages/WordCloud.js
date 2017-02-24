@@ -26,30 +26,35 @@ export default class WordCloud extends React.Component {
   }
 
   componentWillMount() {
-  	WordCloudStore.on("change", this.getWordData);
-    ArtistsStore.on("change", this.getArtistData);
+  	WordCloudStore.on("change", this.getWordData, this.getArtistData);
+    // ArtistsStore.on("change", this.getArtistData);
   }
 
   componentWillUnmount() {
-  	WordCloudStore.removeListener("change", this.getWordData);
-    ArtistsStore.removeListener("change", this.getArtistData);
-
+  	WordCloudStore.removeListener("change", this.getWordData, this.getArtistData);
+    // ArtistsStore.removeListener("change", this.getArtistData);
   }
 
   getWordData() {
   	this.setState({
   		wordData: WordCloudStore.getAllWordData(),
+      artistData: ArtistsStore.getAllArtistData(),
   	});
   }
 
-  getArtistData() {
-    this.setState({
-      artistData: ArtistsStore.getAllArtistData(),
-    });
-  }
+  // getArtistData() {
+  // 	this.setState({
+  // 		artistData: ArtistsStore.getAllArtistData(),
+  // 	});
+  // }
 
   reloadWordCloud() {
   	WordCloudActions.reloadWordCloud();
+    WordCloudActions.reloadArtistData();
+  }
+
+  reloadArtistData() {
+    WordCloudActions.reloadArtistData();
   }
 
   handleInputChange(event) {
@@ -71,7 +76,6 @@ export default class WordCloud extends React.Component {
          isGrayscale: true,
          colorOpts: { hue: 'monochrome' }
        });
-
      }
    }
 
@@ -79,11 +83,12 @@ export default class WordCloud extends React.Component {
     const { artistData, wordData, isColor, colorOpts } = this.state;
     const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
 
+    console.log(artistData);
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
 
-        <TagCloud minSize={12}
+        <TagCloud minSize={5}
             maxSize={35}
             tags={wordData}
             colorOptions={colorOpts}
@@ -125,7 +130,7 @@ export default class WordCloud extends React.Component {
 					 </span>  Share
           </button>
         </Link>
-				<button class="btn btn-lg" style={Styles.addButtonStyle}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={this.reloadWordCloud.bind(this)}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>

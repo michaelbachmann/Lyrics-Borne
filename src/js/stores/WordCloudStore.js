@@ -4,17 +4,7 @@ import dispatcher from "../dispatcher";
 class WordCloudStore extends EventEmitter {
 	constructor() {
 		super()
-		this.wordData = [
-      { value: "jQuery", count: 25 }, { value: "MongoDB", count: 18 },
-      { value: "Flex", count: 38 }, { value: "React", count: 30 },
-      { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 },
-      { value: "HTML5", count: 33 }, { value: "CSS3", count: 20 },
-      { value: "Webpack", count: 22 }, { value: "Babel.js", count: 7 },
-      { value: "ECMAScript", count: 25 }, { value: "Jest", count: 15 },
-      { value: "Mocha", count: 17 }, { value: "React Native", count: 27 },
-      { value: "Angular.js", count: 30 }, { value: "TypeScript", count: 15 },
-      { value: "Flow", count: 30 }, { value: "NPM", count: 11 },
-    ];
+		this.wordData = [];
 	}
 
 	getAllWordData() {
@@ -24,7 +14,6 @@ class WordCloudStore extends EventEmitter {
 	handleActions(action) {
 		switch(action.type) {
 			case "receive-word-cloud-data": {
-				console.log('RECEIVE WC DATA: ' + action.wordData[0].value);
 				this.wordData = action.wordData;
 				this.emit("change");
 				break;
