@@ -5,7 +5,7 @@ import dispatcher from "../dispatcher";
 export function reloadWordCloud() {
 	dispatcher.dispatch({type: "receive-wc-data",
 		data: {
-			
+
 		}
 });
 }

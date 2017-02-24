@@ -4,6 +4,7 @@
   "description": "Creates a word cloud for an artists lyric's.",
   "main": "webpack.config.js",
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -18,7 +19,7 @@
     "highlightable": "^1.0.4",
     "history": "^1.17.0",
     "randomcolor": "^0.4.4",
-    "react": "^0.14.6",
+    "react": "^0.14.8",
     "react-dom": "^0.14.6",
     "react-highlighter": "^0.3.3",
     "react-router": "^1.0.3",

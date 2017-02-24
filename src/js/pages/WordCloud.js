@@ -3,6 +3,8 @@ import Styles from "../styles.css"
 import { TagCloud } from "react-tagcloud";
 import * as WordCloudActions from "../actions/WordCloudActions";
 import WordCloudStore from "../stores/WordCloudStore";
+import ArtistsStore from "../stores/ArtistsStore";
+import ArtistResult from "../components/ArtistResult";
 import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
 
@@ -12,6 +14,7 @@ export default class WordCloud extends React.Component {
   	this.getWordData = this.getWordData.bind(this);
   	this.state = {
   		wordData: WordCloudStore.getAllWordData(),
+      artistData: ArtistsStore.getAllArtistData(),
       isGrayscale: false,
       colorOpts: {
         luminosity: 'dark',
@@ -24,16 +27,25 @@ export default class WordCloud extends React.Component {
 
   componentWillMount() {
   	WordCloudStore.on("change", this.getWordData);
+    ArtistsStore.on("change", this.getArtistData);
   }
 
   componentWillUnmount() {
   	WordCloudStore.removeListener("change", this.getWordData);
+    ArtistsStore.removeListener("change", this.getArtistData);
+
   }
 
   getWordData() {
   	this.setState({
   		wordData: WordCloudStore.getAllWordData(),
   	});
+  }
+
+  getArtistData() {
+    this.setState({
+      artistData: ArtistsStore.getAllArtistData(),
+    });
   }
 
   reloadWordCloud() {
@@ -64,8 +76,9 @@ export default class WordCloud extends React.Component {
    }
 
   render() {
-    const { wordData, isColor, colorOpts } = this.state;
-    console.log(colorOpts);
+    const { artistData, wordData, isColor, colorOpts } = this.state;
+    const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
+
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
@@ -99,6 +112,8 @@ export default class WordCloud extends React.Component {
         <div class="input-group" style={Styles.inputStyle}>
 					<input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2"></input>
 				</div>
+
+        <table style={Styles.resultTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
 				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={this.reloadWordCloud.bind(this)}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">

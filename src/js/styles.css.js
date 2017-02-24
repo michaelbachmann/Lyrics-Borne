@@ -48,6 +48,13 @@ export default class Styles {
         margin:"0 auto",
         borderRadius: "3",
     }
+		static resultTableStyle = {
+				border: "2px solid #653CE0",
+				backgroundColor: "white",
+				width: "470px",
+				margin: "10px auto",
+				borderRadius: "3",
+		}
 		static lyricsStyle = {
 			backgroundColor: "#d3d3d3",
 			borderColor: "#d3d3d3",
