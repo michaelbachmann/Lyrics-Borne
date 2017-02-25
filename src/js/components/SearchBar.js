@@ -5,11 +5,16 @@ import Styles from "../styles.cs";
 export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       input: '',
       displayResults: props
     }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  static getInputValue () {
+    const { input } = this.state;
+    return input;
   }
 
   getInputStyle() {
@@ -22,16 +27,19 @@ export default class SearchBar extends React.Component {
     }
   }
 
-  handleQueryChange(e) {
-    this.setState({
-      input: e.target.value
-    });
+  handleChange(event) {
+    this.setState({input: event.target.value});
   }
 
   render() {
     return (
       <div class="input-group" style={this.getInputStyle()}>
-        <input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2" onChange={this.handleQueryChange}></input>
+        <input type="text" class="form-control "
+          value={this.state.input}
+          placeholder="Search artists..."
+          aria-describedby="sizing-addon2"
+          onChange={this.handleChange}>
+        </input>
       </div>
     );
   }

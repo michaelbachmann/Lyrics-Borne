@@ -28,12 +28,6 @@ export default class Styles {
     	marginTop: "10px",
     	width: "150px"
     };
-    static inputStyle = {
-    	margin:"0 auto",
-    	borderRadius: "3",
-    	width: "470px",
-        border: "2px solid #653CE0"
-    };
     static centerAlignElements = {
     	textAlign: "center"
     };
@@ -48,13 +42,6 @@ export default class Styles {
         margin:"0 auto",
         borderRadius: "3",
     }
-		static resultTableStyle = {
-				border: "2px solid #653CE0",
-				backgroundColor: "white",
-				width: "470px",
-				margin: "10px auto",
-				borderRadius: "3",
-		}
 		static lyricsStyle = {
 			backgroundColor: "#d3d3d3",
 			borderColor: "#d3d3d3",
@@ -65,4 +52,43 @@ export default class Styles {
 		static leftAlignElements = {
 			textAlign: "left"
 		}
+
+		static resultsTableStyle = {
+			backgroundColor: "white",
+			width: "470px",
+			marginTop: "0",
+			marginLeft: "auto",
+			marginBottom: "0",
+			marginRight: "auto",
+			borderTopLeftRadius: "0",
+			borderTopRightRadius:"0",
+			borderBottomRightRadius:"3",
+			borderBottomLeftRadius:"3",
+			borderTop: "0px solid #653CE0",
+			borderBottom: "2px solid #653CE0",
+			borderRight: "2px solid #653CE0",
+			borderLeft: "2px solid #653CE0",
+		}
+		static resultsInputStyle = {
+			backgroundColor: "white",
+			width: "470px",
+			marginTop: "0",
+			marginLeft: "auto",
+			marginBottom: "0",
+			marginRight: "auto",
+			borderTopLeftRadius: "3",
+			borderTopRightRadius:"3",
+			borderBottomRightRadius:"0",
+			borderBottomLeftRadius:"0",
+			border: "2px solid #653CE0"
+
+		}
+		static inputStyle = {
+			margin:"0 auto",
+			borderRadius: "3",
+			width: "470px",
+			border: "2px solid #653CE0"
+		};
+
+
 }

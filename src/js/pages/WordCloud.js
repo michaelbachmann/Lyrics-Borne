@@ -111,7 +111,7 @@ export default class WordCloud extends React.Component {
   render() {
     const { displayResults, artistData, wordData, isColor, colorOpts } = this.state;
     const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
-
+    console.log("~~~~~~"+SearchBar.getInputValue());
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
