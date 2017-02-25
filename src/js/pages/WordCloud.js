@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../styles.css"
+import Styles from "../styles.cs"
 import { TagCloud } from "react-tagcloud";
 import * as WordCloudActions from "../actions/WordCloudActions";
 import WordCloudStore from "../stores/WordCloudStore";
@@ -7,55 +7,80 @@ import ArtistsStore from "../stores/ArtistsStore";
 import ArtistResult from "../components/ArtistResult";
 import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
+import Autosuggest from 'react-autosuggest';
+import SearchBar from '../components/SearchBar';
+
 
 export default class WordCloud extends React.Component {
   constructor() {
   	super();
-  	this.getWordData = this.getWordData.bind(this);
+  	this.getData = this.getData.bind(this);
   	this.state = {
   		wordData: WordCloudStore.getAllWordData(),
-      artistData: ArtistsStore.getAllArtistData(),
+      artistData: WordCloudStore.getAllArtistData(),
       isGrayscale: false,
       colorOpts: {
         luminosity: 'dark',
         format: 'rgba',
-        alpha: 0.5
-      }
-  	};
+        alpha: 0.5,
+      },
+      value: '',
+      suggestions: [],
+      displayResults: true,
+    };
+
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
-  	WordCloudStore.on("change", this.getWordData, this.getArtistData);
-    // ArtistsStore.on("change", this.getArtistData);
+  	WordCloudStore.on("change", this.getData, this.getArtistData);
+    //ArtistsStore.on("change", this.getArtistData);
   }
 
   componentWillUnmount() {
-  	WordCloudStore.removeListener("change", this.getWordData, this.getArtistData);
-    // ArtistsStore.removeListener("change", this.getArtistData);
+  	WordCloudStore.removeListener("change", this.getData, this.getArtistData);
+    //ArtistsStore.removeListener("change", this.getArtistData);
   }
 
-  getWordData() {
+  getData() {
   	this.setState({
   		wordData: WordCloudStore.getAllWordData(),
-      artistData: ArtistsStore.getAllArtistData(),
+      artistData: WordCloudStore.getAllArtistData(),
   	});
   }
 
-  // getArtistData() {
-  // 	this.setState({
-  // 		artistData: ArtistsStore.getAllArtistData(),
-  // 	});
+  getTableStyle() {
+    const { displayResults } = this.state;
+    if (displayResults) {
+      return Styles.resultsTableStyle;
+    } else {
+      return Styles.noResultsTableStyle;
+    }
+  }
+
+  // getInputStyle() {
+  //   const { displayResults } = this.state;
+  //   if (displayResults) {
+  //     return Styles.resultsInputStyle;
+  //   } else {
+  //     console.log(Styles.inputStyle);
+  //     return Styles.inputStyle;
+  //   }
   // }
 
+  // Not Used
   reloadWordCloud() {
-  	WordCloudActions.reloadWordCloud();
+    WordCloudActions.reloadWordCloud();
+  }
+  queryArtists(query) {
     WordCloudActions.reloadArtistData();
   }
+  // handleQueryChange(e) {
+  //   this.setState({
+  //     input: e.target.value
+  //   });
+  // }
 
-  reloadArtistData() {
-    WordCloudActions.reloadArtistData();
-  }
 
   handleInputChange(event) {
      const target = event.target;
@@ -79,11 +104,14 @@ export default class WordCloud extends React.Component {
      }
    }
 
+
+  //  <div class="input-group" style={this.getInputStyle()}>
+    //  <input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2" onChange={this.handleQueryChange}></input>
+  //  </div>
   render() {
-    const { artistData, wordData, isColor, colorOpts } = this.state;
+    const { displayResults, artistData, wordData, isColor, colorOpts } = this.state;
     const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
 
-    console.log(artistData);
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
@@ -114,13 +142,12 @@ export default class WordCloud extends React.Component {
         </label>
         </form>
 
-        <div class="input-group" style={Styles.inputStyle}>
-					<input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2"></input>
-				</div>
 
-        <table style={Styles.resultTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={this.reloadWordCloud.bind(this)}>
+        <SearchBar results={displayResults}></SearchBar>
+        <table style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
+
+				<button class="btn btn-lg" style={Styles.searchButtonStyle}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">
 					</span>  Search
 				</button>
@@ -130,7 +157,7 @@ export default class WordCloud extends React.Component {
 					 </span>  Share
           </button>
         </Link>
-				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={this.reloadWordCloud.bind(this)}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>

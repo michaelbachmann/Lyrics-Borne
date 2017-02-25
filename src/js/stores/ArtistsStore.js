@@ -4,7 +4,12 @@ import dispatcher from "../dispatcher";
 class ArtistsStore extends EventEmitter {
 	constructor() {
 		super();
-		this.artistData = [];
+		this.artistData = [
+			{ artist: "Edward Sharpe", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
+			{ artist: "Black Keys", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
+			{ artist: "Vanilla Ice", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
+			{ artist: "Dr. Dre", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" }
+		];
 	}
 
 	getAllArtistData() {

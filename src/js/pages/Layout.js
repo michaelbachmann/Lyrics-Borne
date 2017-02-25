@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../styles.css"
+import Styles from "../styles.cs"
 import { Link } from "react-router";
 
 export default class Layout extends React.Component {
