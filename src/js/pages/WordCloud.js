@@ -8,8 +8,6 @@ import ArtistResult from "../components/ArtistResult";
 import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
 import Autosuggest from 'react-autosuggest';
-import SearchBar from '../components/SearchBar';
-
 
 export default class WordCloud extends React.Component {
   constructor() {
@@ -166,7 +164,7 @@ export default class WordCloud extends React.Component {
 					 </span>  Share
           </button>
         </Link>
-				<button class="btn btn-lg" style={Styles.addButtonStyle}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud()}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>
