@@ -26,17 +26,15 @@ export default class WordCloud extends React.Component {
       inputData: WordCloudStore.getAllInputData(),
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.updateColor = this.updateColor.bind(this);
   }
 
   componentWillMount() {
-  	WordCloudStore.on("change", this.getData, this.getArtistData);
-    //ArtistsStore.on("change", this.getArtistData);
+  	WordCloudStore.on("change", this.getData);
   }
 
   componentWillUnmount() {
-  	WordCloudStore.removeListener("change", this.getData, this.getArtistData);
-    //ArtistsStore.removeListener("change", this.getArtistData);
+  	WordCloudStore.removeListener("change", this.getData);
   }
 
   getData() {
@@ -77,14 +75,8 @@ export default class WordCloud extends React.Component {
   updateInputData(event) {
     WordCloudActions.reloadInputData(event.target.value);
   }
-  // handleQueryChange(e) {
-  //   this.setState({
-  //     input: e.target.value
-  //   });
-  // }
 
-
-  handleInputChange(event) {
+  updateColor(event) {
      const target = event.target;
      const isGrayscale = target.type === 'checkbox' ? target.checked : target.value;
      const name = target.name;
@@ -139,7 +131,7 @@ export default class WordCloud extends React.Component {
             type="checkbox"
             defaultChecked={isColor}
             checked={this.state.isGrayscale}
-            onChange={this.handleInputChange} />
+            onChange={this.updateColor} />
         </label>
         </form>
 
