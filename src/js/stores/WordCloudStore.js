@@ -34,6 +34,7 @@ class WordCloudStore extends EventEmitter {
 				break;
 			}
 			case "receive-artists-data": {
+				console.log("OMG")
 				this.artistData = action.artistData;
 				this.emit("change");
 				break;

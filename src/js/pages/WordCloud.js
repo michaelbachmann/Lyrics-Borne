@@ -25,7 +25,7 @@ export default class WordCloud extends React.Component {
         alpha: 0.5,
       },
       displayResults: true,
-      inputData: ''
+      inputData: WordCloudStore.getAllInputData(),
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -68,12 +68,13 @@ export default class WordCloud extends React.Component {
     }
   }
 
+
   // Not Used
   reloadWordCloud() {
     WordCloudActions.reloadWordCloud();
   }
   queryArtists(query) {
-    WordCloudActions.reloadArtistData();
+    WordCloudActions.reloadArtistData(query);
   }
   updateInputData(event) {
     WordCloudActions.reloadInputData(event.target.value);
@@ -144,16 +145,18 @@ export default class WordCloud extends React.Component {
         </label>
         </form>
 
-        <input type="text" class="form-control "
-          value={this.state.inputData}
-          placeholder="Search artists..."
-          aria-describedby="sizing-addon2"
-          onChange={this.updateInputData}>
-        </input>
+        <div class="input-group" style={this.getInputStyle()}>
+          <input type="text" class="form-control "
+            value={this.state.inputData}
+            placeholder="Search artists..."
+            aria-describedby="sizing-addon2"
+            onChange={this.updateInputData}>
+          </input>
+        </div>
 
         <table style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={this.queryArtists(inputData)}>
+				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">
 					</span>  Search
 				</button>
