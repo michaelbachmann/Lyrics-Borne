@@ -156,7 +156,7 @@ export default class WordCloud extends React.Component {
 					 </span>  Share
           </button>
         </Link>
-				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud()}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>

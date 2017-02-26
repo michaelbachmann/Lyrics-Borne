@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, browserHistory } from 'react-router';
+import * as WordCloudActions from "../actions/WordCloudActions";
+import WordCloudStore from "../stores/WordCloudStore";
 
 export default class ArtistResult extends React.Component {
   render() {
@@ -25,7 +27,7 @@ export default class ArtistResult extends React.Component {
     const imgDimension = 40;
     return (
     		<tr style={rowStyle}>
-        	<td style={songColumnStyle}>{artist}</td>
+        	<td style={songColumnStyle}><a onClick={()=>WordCloudActions.reloadWordCloud(artist)}>{artist}</a></td>
           <td style={countColumnStyle}><img src={imgURL} height="30" width="26"/></td>
         </tr>
     );

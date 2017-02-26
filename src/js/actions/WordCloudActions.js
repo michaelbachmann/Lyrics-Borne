@@ -1,7 +1,7 @@
 import dispatcher from "../dispatcher";
 import axios from "axios";
 
-export function reloadWordCloud() {
+export function reloadWordCloud(artistName) {
   dispatcher.dispatch({type: "fetch-word-cloud-data"});
   axios.get('https://httpbin.org/get')
   .then(function (response) {
