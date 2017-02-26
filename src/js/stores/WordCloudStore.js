@@ -44,12 +44,12 @@ class WordCloudStore extends EventEmitter {
 				break;
 			}
 			case "clear-word-cloud-data": {
-				this.inputData = [];
+				this.wordData = [];
 				this.emit("change");
 				break;
 			}
 			case "clear-artists-data": {
-				this.inputData = [];
+				this.artistData = [];
 				this.emit("change");
 				break;
 			}

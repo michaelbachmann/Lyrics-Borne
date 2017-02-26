@@ -27,7 +27,7 @@ export default class ArtistResult extends React.Component {
     const imgDimension = 40;
     return (
     		<tr style={rowStyle}>
-        	<td style={songColumnStyle}><a onClick={()=>WordCloudActions.reloadWordCloud(artist)}>{artist}</a></td>
+        	<td style={songColumnStyle}><a onClick={()=>WordCloudActions.artistClicked(artist)}>{artist}</a></td>
           <td style={countColumnStyle}><img src={imgURL} height="30" width="26"/></td>
         </tr>
     );

@@ -26,6 +26,12 @@ export function reloadWordCloud(artistName) {
   });
 }
 
+export function artistClicked(artist) {
+  console.log("im here");
+  clearAristData();
+  reloadInputData(artist);
+}
+
 export function clearWordCloudData() {
   dispatcher.dispatch({type: "clear-word-cloud-data"});
 }
