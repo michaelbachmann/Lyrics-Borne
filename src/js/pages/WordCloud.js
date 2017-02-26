@@ -24,9 +24,8 @@ export default class WordCloud extends React.Component {
         format: 'rgba',
         alpha: 0.5,
       },
-      value: '',
-      suggestions: [],
       displayResults: true,
+      inputData: ''
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,6 +45,7 @@ export default class WordCloud extends React.Component {
   	this.setState({
   		wordData: WordCloudStore.getAllWordData(),
       artistData: WordCloudStore.getAllArtistData(),
+      inputData: WordCloudStore.getAllInputData(),
   	});
   }
 
@@ -58,15 +58,15 @@ export default class WordCloud extends React.Component {
     }
   }
 
-  // getInputStyle() {
-  //   const { displayResults } = this.state;
-  //   if (displayResults) {
-  //     return Styles.resultsInputStyle;
-  //   } else {
-  //     console.log(Styles.inputStyle);
-  //     return Styles.inputStyle;
-  //   }
-  // }
+  getInputStyle() {
+    const { displayResults } = this.state;
+    if (displayResults) {
+      return Styles.resultsInputStyle;
+    } else {
+      console.log(Styles.inputStyle);
+      return Styles.inputStyle;
+    }
+  }
 
   // Not Used
   reloadWordCloud() {
@@ -74,6 +74,9 @@ export default class WordCloud extends React.Component {
   }
   queryArtists(query) {
     WordCloudActions.reloadArtistData();
+  }
+  updateInputData(event) {
+    WordCloudActions.reloadInputData(event.target.value);
   }
   // handleQueryChange(e) {
   //   this.setState({
@@ -109,9 +112,8 @@ export default class WordCloud extends React.Component {
     //  <input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2" onChange={this.handleQueryChange}></input>
   //  </div>
   render() {
-    const { displayResults, artistData, wordData, isColor, colorOpts } = this.state;
+    const { inputData, displayResults, artistData, wordData, isColor, colorOpts } = this.state;
     const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
-    console.log("~~~~~~"+SearchBar.getInputValue());
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
@@ -142,12 +144,16 @@ export default class WordCloud extends React.Component {
         </label>
         </form>
 
+        <input type="text" class="form-control "
+          value={this.state.inputData}
+          placeholder="Search artists..."
+          aria-describedby="sizing-addon2"
+          onChange={this.updateInputData}>
+        </input>
 
-
-        <SearchBar results={displayResults}></SearchBar>
         <table style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-				<button class="btn btn-lg" style={Styles.searchButtonStyle}>
+				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={this.queryArtists(inputData)}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">
 					</span>  Search
 				</button>

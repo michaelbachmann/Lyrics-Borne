@@ -13,8 +13,7 @@ export default class SearchBar extends React.Component {
   }
 
   static getInputValue () {
-    const { input } = this.state;
-    return input;
+    return this.state.input;
   }
 
   getInputStyle() {

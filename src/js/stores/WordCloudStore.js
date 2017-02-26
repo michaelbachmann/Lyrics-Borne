@@ -11,6 +11,7 @@ class WordCloudStore extends EventEmitter {
 		super()
 		this.wordData = [];
 		this.artistData = [];
+		this.inputData = '';
 	}
 
 	getAllWordData() {
@@ -19,6 +20,10 @@ class WordCloudStore extends EventEmitter {
 
 	getAllArtistData() {
 		return this.artistData;
+	}
+
+	getAllInputData() {
+		return this.inputData;
 	}
 
 	handleActions(action) {
@@ -30,6 +35,11 @@ class WordCloudStore extends EventEmitter {
 			}
 			case "receive-artists-data": {
 				this.artistData = action.artistData;
+				this.emit("change");
+				break;
+			}
+			case "receive-input-data": {
+				this.inputData = action.inputData;
 				this.emit("change");
 				break;
 			}
