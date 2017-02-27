@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../styles.cs"
+import Styles from "../styles.css"
 import { TagCloud } from "react-tagcloud";
 import * as WordCloudActions from "../actions/WordCloudActions";
 import WordCloudStore from "../stores/WordCloudStore";
@@ -156,7 +156,7 @@ export default class WordCloud extends React.Component {
 					 </span>  Share
           </button>
         </Link>
-				<button class="btn btn-lg" style={Styles.addButtonStyle}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud()}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>

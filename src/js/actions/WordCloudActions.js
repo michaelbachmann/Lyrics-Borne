@@ -27,21 +27,8 @@ export function reloadWordCloud(artistName) {
 }
 
 export function artistClicked(artist) {
-  console.log("im here");
   clearAristData();
   reloadInputData(artist);
-}
-
-export function clearWordCloudData() {
-  dispatcher.dispatch({type: "clear-word-cloud-data"});
-}
-
-export function clearInputData() {
-  dispatcher.dispatch({type: "clear-input-data"});
-}
-
-export function clearAristData() {
-  dispatcher.dispatch({type: "clear-artists-data"});
 }
 
 export function reloadArtistData(query) {
@@ -62,6 +49,18 @@ export function reloadArtistData(query) {
 
 export function reloadInputData(query) {
   dispatcher.dispatch({type: "receive-input-data", inputData: query});
+}
+
+export function clearWordCloudData() {
+  dispatcher.dispatch({type: "clear-word-cloud-data"});
+}
+
+export function clearInputData() {
+  dispatcher.dispatch({type: "clear-input-data"});
+}
+
+export function clearAristData() {
+  dispatcher.dispatch({type: "clear-artists-data"});
 }
 //
 // { artist: "Edward Sharpe", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },

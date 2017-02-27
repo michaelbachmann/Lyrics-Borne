@@ -1,8 +1,8 @@
 import React from "react";
-import Styles from "../styles.cs";
+import Styles from "../styles.css";
 import { Link, browserHistory } from 'react-router';
 
-import SongResults from "../components/SongResults";
+import SongResult from "../components/SongResult";
 import * as SongActions from "../actions/SongActions";
 import SongListStore from "../stores/SongListStore";
 
@@ -38,7 +38,7 @@ export default class SongList extends React.Component {
   	const { params } = this.props;
   	const word = query.word;
     const { songData, title } = this.state;
-    const mappedSongData = songData.map((song, i) => <SongResults key={i} song={song.song} count={song.count} word={params.word}/> );
+    const mappedSongData = songData.map((song, i) => <SongResult key={i} song={song.song} count={song.count} word={params.word}/> );
 
     return (
       <div>

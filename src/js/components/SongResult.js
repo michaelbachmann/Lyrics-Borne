@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, browserHistory } from 'react-router';
 
-export default class SongResults extends React.Component {
+export default class SongResult extends React.Component {
   render() {
     const { count, song, word } = this.props;
     const songStr = ` ${song}`;

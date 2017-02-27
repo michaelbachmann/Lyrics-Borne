@@ -6,8 +6,6 @@ import WordCloudStore from "../stores/WordCloudStore";
 export default class ArtistResult extends React.Component {
   render() {
     const { artist, imgURL } = this.props;
-    // console.log(this.props);
-    // console.log(`Well then... artist = ${artist} and imgURL= ${imgURL}`)
 
     const rowStyle = {
     	paddingLeft: "3px"
