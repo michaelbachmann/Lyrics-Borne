@@ -1,11 +1,13 @@
 import React from "react";
 import Styles from "../styles.css";
 import { Link, browserHistory } from 'react-router';
-
 import SongResult from "../components/SongResult";
 import * as SongActions from "../actions/SongActions";
 import SongListStore from "../stores/SongListStore";
 
+// SongList Component that represents our SongList page. This page
+// contains a list of all of the the songs that contain a certain
+// word.
 export default class SongList extends React.Component {
   constructor() {
     super();
@@ -14,25 +16,26 @@ export default class SongList extends React.Component {
       songData: SongListStore.getAllSongData(),
     };
   }
-
+  // Adds listener on re-render
   componentWillMount() {
     SongListStore.on("change", this.getSongData);
   }
-
+  // Removes listener on re-render
   componentWillUnmount() {
     SongListStore.removeListener("change", this.getSongData);
   }
-
+  // Updates our components state variable by grabbing the stores
+  // current version of our state
   getSongData() {
     this.setState({
       songData: SongListStore.getAllSongData(),
     });
   }
-
+  // Pulls in song data from our servers rest API
   reloadSongData() {
     SongActions.reloadSongData();
   }
-
+  // Render method that contains all of our html
   render() {
   	const { query } = this.props.location;
   	const { params } = this.props;
@@ -43,6 +46,7 @@ export default class SongList extends React.Component {
     return (
       <div>
         <h1 style={Styles.titleStyle}>{word}</h1>
+
         <table style={Styles.tableStyle}><tbody>{mappedSongData}</tbody></table>
 
         <Link to={`/`}>

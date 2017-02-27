@@ -1,12 +1,15 @@
 import React from "react";
 import { Link, browserHistory } from 'react-router';
 
+// SongResult component creates a table row that has a Link
+// to a lyrics page for that song and passes in the word as props
 export default class SongResult extends React.Component {
   render() {
     const { count, song, word } = this.props;
     const songStr = ` ${song}`;
     const urlStr = `/lyrics/${word}/${song}`;
 
+    // Styling Objects
     const rowStyle = {
     	paddingLeft: "3px"
     };
@@ -21,7 +24,7 @@ export default class SongResult extends React.Component {
     	width: "40px",
     	borderBottom:"2px solid #653CE0",
     	padding: "5px"
-    }; // 607 672 32CL
+    };
 
     return (
     		<tr style={rowStyle}>

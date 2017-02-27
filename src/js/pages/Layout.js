@@ -2,6 +2,7 @@ import React from "react";
 import Styles from "../styles.css"
 import { Link } from "react-router";
 
+// Glonal react component in which child pages are rendered in
 export default class Layout extends React.Component {
 	render() {
 		const { location } = this.props;

@@ -1,6 +1,7 @@
 import dispatcher from "../dispatcher";
 import axios from "axios";
 
+// Calls rest API to get word cloud data from our server
 export function reloadWordCloud(artistName) {
   //dispatcher.dispatch({type: `http://localhost:8888/server.php?artistName=${artistName}`);
   axios.get(`http://localhost:8888/server.php?artistName=${artistName}`)
@@ -26,11 +27,7 @@ export function reloadWordCloud(artistName) {
   });
 }
 
-export function artistClicked(artist) {
-  clearAristData();
-  reloadInputData(artist);
-}
-
+// Calls rest API to get artist data from our server
 export function reloadArtistData(query) {
   const filteredQuery = query.replace(/\s\s+/g, ' ');
   const convertedQuery = filteredQuery.replace(/ /g,"+");
@@ -50,22 +47,33 @@ export function reloadArtistData(query) {
   });
 }
 
+// Updates state to make sure the UI updates correctly after an
+// an artist is selected
+export function artistClicked(artist) {
+  clearAristData();
+  reloadInputData(artist);
+}
+
+// Keeps the UI updated for the search bar
 export function reloadInputData(query) {
   dispatcher.dispatch({type: "receive-input-data", inputData: query});
 }
 
+// Clears the word cloud in store
 export function clearWordCloudData() {
   dispatcher.dispatch({type: "clear-word-cloud-data"});
 }
 
+// Clears the input data in store
 export function clearInputData() {
   dispatcher.dispatch({type: "clear-input-data"});
 }
 
+// clears artist data in store
 export function clearAristData() {
   dispatcher.dispatch({type: "clear-artists-data"});
 }
-//
+
 // { artist: "Edward Sharpe", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
 // { artist: "Black Keys", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
 // { artist: "Vanilla Ice", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },

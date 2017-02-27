@@ -1,5 +1,6 @@
 import dispatcher from "../dispatcher";
 
+// Calls rest API to get songlist data from our server
 export function reloadWordCloud() {
   dispatcher.dispatch({type: "fetch-song-list-data"});
   setTimeout(() => {

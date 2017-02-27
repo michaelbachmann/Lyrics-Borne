@@ -9,6 +9,7 @@ import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
 import Autosuggest from 'react-autosuggest';
 
+
 export default class WordCloud extends React.Component {
   constructor() {
   	super();
@@ -28,15 +29,16 @@ export default class WordCloud extends React.Component {
 
     this.updateColor = this.updateColor.bind(this);
   }
-
+  // Adds listener on re-render
   componentWillMount() {
   	WordCloudStore.on("change", this.getData);
   }
-
+  // Removes listener on re-render
   componentWillUnmount() {
   	WordCloudStore.removeListener("change", this.getData);
   }
-
+  // Updates our components state variables by grabbing the stores
+  // current version of our state
   getData() {
   	this.setState({
   		wordData: WordCloudStore.getAllWordData(),
@@ -44,7 +46,7 @@ export default class WordCloud extends React.Component {
       inputData: WordCloudStore.getAllInputData(),
   	});
   }
-
+  // Returns a specific style depending on the current state
   getTableStyle() {
     const { displayResults } = this.state;
     if (displayResults) {
@@ -53,7 +55,7 @@ export default class WordCloud extends React.Component {
       return Styles.noResultsTableStyle;
     }
   }
-
+  // Returns a specific style depending on the current state
   getInputStyle() {
     const { displayResults } = this.state;
     if (displayResults) {
@@ -63,19 +65,19 @@ export default class WordCloud extends React.Component {
       return Styles.inputStyle;
     }
   }
-
-
-  // Not Used
+  // Calls our rest API to get word cloud data
   reloadWordCloud() {
     WordCloudActions.reloadWordCloud();
   }
+  // Calls our rest API to get artist data
   queryArtists(query) {
     WordCloudActions.reloadArtistData(query);
   }
+  // Keeps input updated
   updateInputData(event) {
     WordCloudActions.reloadInputData(event.target.value);
   }
-
+  // Checks value of checkbox and rerenders word cloud in grayscale or color
   updateColor(event) {
      const target = event.target;
      const isGrayscale = target.type === 'checkbox' ? target.checked : target.value;
@@ -97,11 +99,7 @@ export default class WordCloud extends React.Component {
        });
      }
    }
-
-
-  //  <div class="input-group" style={this.getInputStyle()}>
-    //  <input type="text" class="form-control " placeholder="Search artists..." aria-describedby="sizing-addon2" onChange={this.handleQueryChange}></input>
-  //  </div>
+  // Render method that contains all of our html
   render() {
     const { inputData, displayResults, artistData, wordData, isColor, colorOpts } = this.state;
     const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
