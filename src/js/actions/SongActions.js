@@ -7,21 +7,15 @@ export function reloadSongData(songID) {
   .then(function (response) {
     console.log(response);
     dispatcher.dispatch({type: "receive-song-list-data", songData: [
-      { song: "Shakira", count: 25 }, { song: "Justin", count: 18 },
-      { song: "Jkwon", count: 38 }, { song: "Timberlake", count: 30 },
-      { song: "Eminem", count: 28 }, { song: "50Cent", count: 25 },
-      { song: "Drake", count: 33 }, { song: "Doc", count: 20 },
-      { song: "Nelly", count: 22 }, { song: "E40", count: 7 }
+      { song: "Lose Yourself", count: 25 }, { song: "The Next Episode", count: 18 },
+      { song: "Go Flex", count: 38 }, { song: "Still DRE", count: 30 },
     ]});
   })
   .catch(function (error) {
     console.log(error);
     dispatcher.dispatch({type: "receive-song-list-data", songData: [
-      { song: "Shakira", count: 25 }, { song: "Justin", count: 18 },
-      { song: "Jkwon", count: 38 }, { song: "Timberlake", count: 30 },
-      { song: "Eminem", count: 28 }, { song: "50Cent", count: 25 },
-      { song: "Drake", count: 33 }, { song: "Doc", count: 20 },
-      { song: "Nelly", count: 22 }, { song: "E40", count: 7 }
+      { song: "Lose Yourself", count: 25 }, { song: "The Next Episode", count: 18 },
+      { song: "Go Flex", count: 38 }, { song: "Still DRE", count: 30 },
     ]});
   });
 }

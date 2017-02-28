@@ -1,7 +1,6 @@
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
-      // { song: "Lose Yourself", count: 25 }, { song: "The Next Episode", count: 18 },
-      // { song: "Go Flex", count: 38 }, { song: "Still DRE", count: 30 },
+
 // Maintains the state of list of songs for a specific word.
 class SongListStore extends EventEmitter {
 	constructor() {

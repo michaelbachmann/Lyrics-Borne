@@ -1,11 +1,6 @@
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
 
-			// { artist: "Edward Sharpe", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-			// { artist: "Black Keys", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-			// { artist: "Vanilla Ice", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-			// { artist: "Dr. Dre", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" }
-
 // Maintains state for the artist results
 class ArtistsStore extends EventEmitter {
 	constructor() {
