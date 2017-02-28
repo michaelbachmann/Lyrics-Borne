@@ -144,17 +144,16 @@ export default class WordCloud extends React.Component {
 
         <table style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-  				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
-  					<span class="glyphicon glyphicon-search" aria-hidden="true">
-  					</span>  Search
-  				</button>
+				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
+					<span class="glyphicon glyphicon-search" aria-hidden="true">
+					</span>  Search
+				</button>
 
-				<Link to="lyrics">
-          <button class="btn btn-lg" style={Styles.shareButtonStyle}>
-					 <span class="glyphicon glyphicon-share" aria-hidden="true">
-					 </span>  Share
-          </button>
-        </Link>
+        <button class="btn btn-lg" style={Styles.shareButtonStyle}>
+				 <span class="glyphicon glyphicon-share" aria-hidden="true">
+				 </span>  Share
+        </button>
+
 				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud()}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
