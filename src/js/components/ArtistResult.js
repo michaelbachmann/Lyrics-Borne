@@ -9,7 +9,10 @@ import WordCloudStore from "../stores/WordCloudStore";
 // artist
 export default class ArtistResult extends React.Component {
   render() {
-    const { artist, imgURL } = this.props;
+    const { mName, mImageURL, mID } = this.props;
+    console.log(mName);
+    console.log(mImageURL);
+    console.log(mID);
     // Styling objects
     const rowStyle = {
     	paddingLeft: "3px"
@@ -28,8 +31,8 @@ export default class ArtistResult extends React.Component {
     const imgDimension = 40;
     return (
     		<tr style={rowStyle}>
-        	<td style={songColumnStyle}><a onClick={()=>WordCloudActions.artistClicked(artist)}>{artist}</a></td>
-          <td style={countColumnStyle}><img src={imgURL} height="30" width="26"/></td>
+        	<td style={songColumnStyle}><a onClick={()=>WordCloudActions.artistClicked(mName)}>{mName}</a></td>
+          <td style={countColumnStyle}><img src={mImageURL} height="30" width="26"/></td>
         </tr>
     );
   }

@@ -101,7 +101,7 @@ export default class WordCloud extends React.Component {
   // Render method that contains all of our html
   render() {
     const { inputData, displayResults, artistData, wordData, isColor, colorOpts } = this.state;
-    const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} artist={artist.artist} imgURL={artist.imgURL}/> );
+    const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} mName={artist.mName} mImageURL={artist.mImageURL} mID={artist.mID}/> );
     return (
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
@@ -154,7 +154,7 @@ export default class WordCloud extends React.Component {
 				 </span>  Share
         </button>
 
-				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud()}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud(0)}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>
