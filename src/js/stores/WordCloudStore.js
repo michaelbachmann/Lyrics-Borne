@@ -1,11 +1,8 @@
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
-// this.artistData = [
-// 	{ artist: "Edward Sharpe", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-// 	{ artist: "Black Keys", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-// 	{ artist: "Vanilla Ice", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-// 	{ artist: "Dr. Dre", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" }
-// ];
+
+// Stores the state for the word cloud, search results and
+// input data in the search bar
 class WordCloudStore extends EventEmitter {
 	constructor() {
 		super()
@@ -13,19 +10,13 @@ class WordCloudStore extends EventEmitter {
 		this.artistData = [];
 		this.inputData = '';
 	}
-
-	getAllWordData() {
-		return this.wordData;
-	}
-
-	getAllArtistData() {
-		return this.artistData;
-	}
-
-	getAllInputData() {
-		return this.inputData;
-	}
-
+	// Returns the word data
+	getAllWordData() { return this.wordData; }
+	// Returns the artist result data
+	getAllArtistData() { return this.artistData; }
+	// Returns the input data
+	getAllInputData() { return this.inputData; }
+	// Action handler
 	handleActions(action) {
 		switch(action.type) {
 			case "receive-word-cloud-data": {
@@ -61,7 +52,7 @@ class WordCloudStore extends EventEmitter {
 		}
 	}
 }
-
+// Register store with dispatcher and export the store
 const wordCloudStore = new WordCloudStore;
 dispatcher.register(wordCloudStore.handleActions.bind(wordCloudStore));
 export default wordCloudStore;

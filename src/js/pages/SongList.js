@@ -32,8 +32,8 @@ export default class SongList extends React.Component {
     });
   }
   // Pulls in song data from our servers rest API
-  reloadSongData() {
-    SongActions.reloadSongData();
+  reloadSongData(songID) {
+    SongActions.reloadSongData(songID);
   }
   // Render method that contains all of our html
   render() {

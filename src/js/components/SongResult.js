@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, browserHistory } from 'react-router';
+import * as LyricsActions from "../actions/LyricsActions";
 
 // SongResult component creates a table row that has a Link
 // to a lyrics page for that song and passes in the word as props
@@ -25,11 +26,10 @@ export default class SongResult extends React.Component {
     	borderBottom:"2px solid #653CE0",
     	padding: "5px"
     };
-
     return (
     		<tr style={rowStyle}>
         	<td style={songColumnStyle}>
-                <Link to={urlStr} originalword={word}>
+                <Link to={urlStr} onClick={LyricsActions.reloadLyricsData(songStr)} originalword={word}>
                     {songStr}
                     </Link>
             </td>

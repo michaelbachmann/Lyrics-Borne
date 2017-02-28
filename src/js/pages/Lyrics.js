@@ -11,8 +11,9 @@ export default class Lyrics extends React.Component {
   constructor() {
     super();
     this.state = {
-      lyrics: LyricsStore.getAllLyricsData()
+      lyrics: LyricsStore.getAllLyricsData(),
     }
+    this.reloadLyricsData = this.reloadLyricsData.bind(this);
   }
   // Adds listener on re-render
   componentWillMount() {
@@ -26,7 +27,7 @@ export default class Lyrics extends React.Component {
   // current version of our state
   getLyricsData() {
     this.setState({
-      songData: LyricsStore.getAllLyricsData(),
+      lyrics: LyricsStore.getAllLyricsData(),
     });
   }
   // Pulls in lyrics from our servers rest API

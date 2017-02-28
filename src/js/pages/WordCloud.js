@@ -2,13 +2,12 @@ import React from "react";
 import Styles from "../styles.css"
 import { TagCloud } from "react-tagcloud";
 import * as WordCloudActions from "../actions/WordCloudActions";
+import * as SongActions from "../actions/SongActions";
 import WordCloudStore from "../stores/WordCloudStore";
 import ArtistsStore from "../stores/ArtistsStore";
 import ArtistResult from "../components/ArtistResult";
 import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
-import Autosuggest from 'react-autosuggest';
-
 
 export default class WordCloud extends React.Component {
   constructor() {
@@ -113,6 +112,7 @@ export default class WordCloud extends React.Component {
             colorOptions={colorOpts}
             onClick={
               (tag) => {
+                SongActions.reloadSongData(tag.value);
                 this.props.history.push({
                   pathname: `/songlist/${tag.value}`,
                   search: `?word=${tag.value}`,
@@ -144,10 +144,11 @@ export default class WordCloud extends React.Component {
 
         <table style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
-					<span class="glyphicon glyphicon-search" aria-hidden="true">
-					</span>  Search
-				</button>
+  				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
+  					<span class="glyphicon glyphicon-search" aria-hidden="true">
+  					</span>  Search
+  				</button>
+
 				<Link to="lyrics">
           <button class="btn btn-lg" style={Styles.shareButtonStyle}>
 					 <span class="glyphicon glyphicon-share" aria-hidden="true">
