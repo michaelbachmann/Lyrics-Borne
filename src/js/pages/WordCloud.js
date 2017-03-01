@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../styles.css"
+import Styles from "../styles.css";
 import { TagCloud } from "react-tagcloud";
 import * as WordCloudActions from "../actions/WordCloudActions";
 import * as SongActions from "../actions/SongActions";
@@ -8,6 +8,8 @@ import ArtistsStore from "../stores/ArtistsStore";
 import ArtistResult from "../components/ArtistResult";
 import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
+import style from "../../styles.css";
+var html2canvas = require("html2canvas");
 
 export default class WordCloud extends React.Component {
   constructor() {
@@ -64,6 +66,50 @@ export default class WordCloud extends React.Component {
       return Styles.inputStyle;
     }
   }
+  popUp(){
+    var object = this.refs.myModal;
+    object.style.display = "block";
+  }
+
+  closePopUp() {
+    var object = this.refs.myModal;
+    object.style.display = "none";
+  }
+
+  renderCanvas() {
+    var mBody = this.refs.modalBody;
+    var mCloud = this.refs.currentCloud;
+    var mImg = this.refs.canvasImg;
+    html2canvas(mCloud, {
+      onrendered: function(canvas) {
+        var dataURL = canvas.toDataURL();
+        mImg.src = dataURL;
+        //mBody.appendChild(canvas);
+      }
+    });
+    this.popUp();
+  }
+
+  shareFB() {
+      FB.ui({
+    method: 'share',
+    display: 'popup',
+    href: 'https://developers.facebook.com/docs/',
+  }, function(response){});
+  }
+
+
+
+  dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], {type: 'image/png'});
+  }
+
   // Calls our rest API to get word cloud data
   reloadWordCloud() {
     WordCloudActions.reloadWordCloud();
@@ -106,6 +152,24 @@ export default class WordCloud extends React.Component {
 			<div>
 				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
 
+      <div id="myModal" className="modal" ref="myModal">
+        <div className="modal-content">
+          <div className="modal-header">
+            <span className="close" id="closeModal" ref="closeModal" onClick={()=>this.closePopUp()}>×</span>
+            <h2>Modal Header</h2>
+          </div>
+          <div className="modal-body" id="modalBody" ref="modalBody">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+          </div>
+          <div className="modal-footer">
+            <h3>Modal Footer</h3>
+            <img id="canvasImg" ref="canvasImg" alt="Right click to save me!"/>
+          </div>
+        </div>
+      </div>
+
+        <div className="word-cloud" id="currentCloud" ref="currentCloud">
         <TagCloud minSize={5}
             maxSize={35}
             tags={wordData}
@@ -120,6 +184,7 @@ export default class WordCloud extends React.Component {
               }
             }
         />
+        </div>
 
         <form>
         <label>
@@ -149,7 +214,7 @@ export default class WordCloud extends React.Component {
 					</span>  Search
 				</button>
 
-        <button class="btn btn-lg" style={Styles.shareButtonStyle}>
+        <button class="btn btn-lg" style={Styles.shareButtonStyle} onClick={() => this.shareFB()}>
 				 <span class="glyphicon glyphicon-share" aria-hidden="true">
 				 </span>  Share
         </button>
