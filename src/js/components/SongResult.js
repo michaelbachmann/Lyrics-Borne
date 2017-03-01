@@ -7,7 +7,7 @@ import ArtistsStore from "../stores/ArtistsStore";
 // to a lyrics page for that song and passes in the word as props
 export default class SongResult extends React.Component {
   render() {
-    const { count, song, word } = this.props;
+    const { artist, count, song, word } = this.props;
     const songStr = `${song}`;
     const urlStr = `/lyrics/${word}/${song}`;
     const savedArtists = ArtistsStore.getSavedArtistData();
@@ -32,7 +32,7 @@ export default class SongResult extends React.Component {
     return (
     		<tr style={rowStyle}>
         	<td style={songColumnStyle}>
-                <Link to={urlStr} onClick={()=>LyricsActions.reloadLyricsData(songStr, savedArtists)} originalword={word}>
+                <Link to={urlStr} onClick={()=>LyricsActions.reloadLyricsData(songStr, artist)} originalword={word}>
                     {songStr}
                     </Link>
             </td>

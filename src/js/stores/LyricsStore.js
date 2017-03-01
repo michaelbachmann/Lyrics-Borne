@@ -5,7 +5,7 @@ import dispatcher from "../dispatcher";
 class LyricsStore extends EventEmitter {
 	constructor() {
 		super();
-		this.lyrics = ``;
+		this.lyrics = "";
 	}
     // Gets lyrics data
 	getAllLyricsData() { return this.lyrics; }

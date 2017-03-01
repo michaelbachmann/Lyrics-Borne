@@ -10,10 +10,10 @@ var Highlight = require('react-highlighter');
 export default class Lyrics extends React.Component {
   constructor() {
     super();
+    this.getLyricsData = this.getLyricsData.bind(this);
     this.state = {
       lyrics: LyricsStore.getAllLyricsData(),
     }
-    this.reloadLyricsData = this.reloadLyricsData.bind(this);
   }
   // Adds listener on re-render
   componentWillMount() {
@@ -26,14 +26,15 @@ export default class Lyrics extends React.Component {
   // Updates our components state variable by grabbing the stores
   // current version of our state
   getLyricsData() {
+    console.log("get lyrics data in lyrics.js");
     this.setState({
       lyrics: LyricsStore.getAllLyricsData(),
     });
   }
   // Pulls in lyrics from our servers rest API
-  reloadLyricsData(songID) {
-    LyricsActions.reloadLyricsData(songID);
-  }
+  // reloadLyricsData(songID, artist) {
+  //   LyricsActions.reloadLyricsData(songID, artist);
+  // }
   // Render method that contains all of our html
   render() {
 		const { query } = this.props.location.query;

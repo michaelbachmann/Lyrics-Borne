@@ -10,8 +10,10 @@ export function reloadSongData(word) {
 
     var arrayOfObjects = [];
     for (var i = 0; i < response.data.length; i++) {
-      Object.keys(response.data[i]).forEach(function(key) {
-        arrayOfObjects.push({song: key, count: (response.data[i])[key]})
+      arrayOfObjects.push({
+        song: response.data[i][0],
+        count: response.data[i][1],
+        artist: response.data[i][2]
       });
     }
     console.log(arrayOfObjects);
