@@ -7,71 +7,40 @@ export function reloadArtistData(query) {
   const convertedQuery = filteredQuery.replace(/ /g,"+");
   axios.get(`http://localhost:8888/server.php?artistName=${convertedQuery}`)
   .then(function (response) {
-    if (response.data.length === 1) {
-      reloadWordCloud()
-    }
     console.log(response);
-    var kendrick = response.data[0];
-    console.log(kendrick);
-        dispatcher.dispatch({type: "receive-artists-data", artistData: response.data});
-        reloadWordCloud(0);
-    // console.log(JSON.parse(response.data));
+    dispatcher.dispatch({type: "receive-artists-data", artistData: response.data});
   })
   .catch(function (error) {
     console.log(error);
-        dispatcher.dispatch({type: "receive-artists-data", artistData: [
-      { artist: "Edward Sharpe", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-      { artist: "Black Keys", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-      { artist: "Vanilla Ice", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" },
-      { artist: "Dr. Dre", imgURL: "https://openclipart.org/image/2400px/svg_to_png/202776/pawn.png" }
-    ]});
   });
 }
 
 // Calls rest API to get word cloud data from our server
 export function reloadWordCloud(artistID) {
-  console.log(artistID);
   axios.get(`http://localhost:8888/server.php?artistID=0`)
   .then(function (response) {
-    console.log(response.data);
-
-
-    // dispatcher.dispatch({type: "receive-word-cloud-data", wordData: [
-    //   { value: "Shakira", count: 25 }, { value: "Justin", count: 18 },
-    //   { value: "Jkwon", count: 38 }, { value: "Timberlake", count: 30 },
-    //   { value: "Eminem", count: 28 }, { value: "50Cent", count: 25 },
-    //   { value: "Drake", count: 33 }, { value: "Doc", count: 20 },
-    //   { value: "Nelly", count: 22 }, { value: "E40", count: 7 },
-    //   { value: "VanillaIce", count: 25 }, { value: "Radiohead", count: 15 },
-    //   { value: "Mocha", count: 17 }, { value: "Jet", count: 27 },
-    //   { value: "Christina", count: 30 }, { value: "Booya", count: 15 },
-    //   { value: "Aguilera", count: 30 }, { value: "Remote", count: 11 },
-    //   { value: "Flex", count: 38 }
-    // ]});
-
+    var arrayOfObjects = [];
+    Object.keys(response.data).forEach(function(key) {
+      arrayOfObjects.push({value: key, count: response.data[key]})
+    });
+    dispatcher.dispatch({type: "receive-word-cloud-data", wordData: arrayOfObjects});
+    clearInputData();
   })
   .catch(function (error) {
     console.log(error);
-        dispatcher.dispatch({type: "receive-word-cloud-data", wordData: [
-      { value: "Shakira", count: 25 }, { value: "Justin", count: 18 },
-      { value: "Jkwon", count: 38 }, { value: "Timberlake", count: 30 },
-      { value: "Eminem", count: 28 }, { value: "50Cent", count: 25 },
-      { value: "Drake", count: 33 }, { value: "Doc", count: 20 },
-      { value: "Nelly", count: 22 }, { value: "E40", count: 7 },
-      { value: "VanillaIce", count: 25 }, { value: "Radiohead", count: 15 },
-      { value: "Mocha", count: 17 }, { value: "Jet", count: 27 },
-      { value: "Christina", count: 30 }, { value: "Booya", count: 15 },
-      { value: "Aguilera", count: 30 }, { value: "Remote", count: 11 },
-      { value: "Flex", count: 38 }
-    ]});
   });
 }
 
 // Updates state to make sure the UI updates correctly after an
 // an artist is selected
 export function artistClicked(artistName) {
-  // clearAristData();
+  clearAristData();
   reloadInputData(artistName);
+}
+
+export function storeArtist(artistName) {
+  console.log(artistName);
+  dispatcher.dispatch({type: "save-artists-data", savedArtists: artistName});
 }
 
 // Keeps the UI updated for the search bar

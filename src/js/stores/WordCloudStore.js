@@ -5,7 +5,7 @@ import dispatcher from "../dispatcher";
 // input data in the search bar
 class WordCloudStore extends EventEmitter {
 	constructor() {
-		super()
+		super();
 		this.wordData = [];
 		this.artistData = [];
 		this.inputData = '';

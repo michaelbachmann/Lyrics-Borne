@@ -116,7 +116,13 @@ export default class WordCloud extends React.Component {
   }
   // Calls our rest API to get artist data
   queryArtists(query) {
+    WordCloudActions.storeArtist(query);
     WordCloudActions.reloadArtistData(query);
+  }
+  // Stores received artist in store
+  storeArtist(query) {
+    console.log(query);
+    WordCloudActions.storeArtist(query);
   }
   // Keeps input updated
   updateInputData(event) {
@@ -150,7 +156,6 @@ export default class WordCloud extends React.Component {
     const mappedArtistData = artistData.map((artist, i) => <ArtistResult key={i} mName={artist.mName} mImageURL={artist.mImageURL} mID={artist.mID}/> );
     return (
 			<div>
-				<h1 style={Styles.titleStyle}>Lyrical Word Clouds</h1>
 
       <div id="myModal" className="modal" ref="myModal">
         <div className="modal-content">
@@ -170,8 +175,8 @@ export default class WordCloud extends React.Component {
       </div>
 
         <div className="word-cloud" id="currentCloud" ref="currentCloud">
-        <TagCloud minSize={5}
-            maxSize={35}
+        <TagCloud minSize={8}
+            maxSize={90}
             tags={wordData}
             colorOptions={colorOpts}
             onClick={

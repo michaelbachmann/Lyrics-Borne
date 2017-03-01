@@ -2,8 +2,16 @@ import dispatcher from "../dispatcher";
 import axios from "axios";
 
 // Calls our rest API to get lyric data from our server
-export function reloadLyricsData(songID) {
-  axios.get(`http://localhost:8888/server.php?songID=${songID}`)
+export function reloadLyricsData(songID, artist) {
+	console.log("RELOADLYRICS DATA");
+	console.log(songID);
+	console.log(artist);
+	var song = songID.split(' ').join('+');
+	console.log(song);
+	console.log(songID);
+	//Another+Nigga+(To+Pimp+A+Butterfly)&artist=Kendrick+Lamar
+  // axios.get(`http://localhost:8888/server.php?song=${songID}&artist=Kendrick+Lamar`)
+  axios.get(`http://localhost:8888/server.php?song=Another+Nigga+(To+Pimp+A+Butterfly)&artist=Kendrick+Lamar`)
   .then(function (response) {
     console.log(response);
   })

@@ -6,9 +6,12 @@ class ArtistsStore extends EventEmitter {
 	constructor() {
 		super();
 		this.artistData = [];
+		this.savedArtists = [];
 	}
 	// Returns all artists results
 	getAllArtistData() { return this.artistData; }
+	// Returns saved artists
+	getSavedArtistData() { return this.savedArtists; }
 	// Action handler
 	handleActions(action) {
 		switch(action.type) {
@@ -21,6 +24,11 @@ class ArtistsStore extends EventEmitter {
         this.artistData = [];
 				this.emit("change");
 				break;
+      }
+      case "save-artists-data": {
+      	console.log(action.savedArtists);
+      	this.savedArtists = action.savedArtists;
+      	break;
       }
 		}
 	}

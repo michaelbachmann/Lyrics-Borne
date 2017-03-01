@@ -1,14 +1,16 @@
 import React from "react";
 import { Link, browserHistory } from 'react-router';
 import * as LyricsActions from "../actions/LyricsActions";
+import ArtistsStore from "../stores/ArtistsStore";
 
 // SongResult component creates a table row that has a Link
 // to a lyrics page for that song and passes in the word as props
 export default class SongResult extends React.Component {
   render() {
     const { count, song, word } = this.props;
-    const songStr = ` ${song}`;
+    const songStr = `${song}`;
     const urlStr = `/lyrics/${word}/${song}`;
+    const savedArtists = ArtistsStore.getSavedArtistData();
 
     // Styling Objects
     const rowStyle = {
@@ -26,10 +28,11 @@ export default class SongResult extends React.Component {
     	borderBottom:"2px solid #653CE0",
     	padding: "5px"
     };
+    console.log(songStr);
     return (
     		<tr style={rowStyle}>
         	<td style={songColumnStyle}>
-                <Link to={urlStr} onClick={LyricsActions.reloadLyricsData(songStr)} originalword={word}>
+                <Link to={urlStr} onClick={()=>LyricsActions.reloadLyricsData(songStr, savedArtists)} originalword={word}>
                     {songStr}
                     </Link>
             </td>
