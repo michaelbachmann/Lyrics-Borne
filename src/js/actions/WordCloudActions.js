@@ -35,19 +35,11 @@ export function reloadWordCloud(artistID) {
 // an artist is selected
 export function artistClicked(artistName) {
   var artists = WordCloudStore.getAllArtistData();
-  // for (var i = artists.length - 1; i >= 0; i--) {
-  //   if (artists[i] === artistName) {
-  //     console.log(artists[i]);
-  //     setCurrentIndexArtist(i);
-  //     break;
-  //   }
-  // }
-  // console.log("WTF MATE = " + getCurrentIndexArtist());
-  // console.log("currentIndexArtist = " + currentIndexArtist);
   clearAristData();
   reloadInputData(artistName);
 }
 
+// Store artist variable
 export function storeArtist(artistName) {
   console.log(artistName);
   dispatcher.dispatch({type: "save-artists-data", savedArtists: artistName});
@@ -73,6 +65,7 @@ export function clearAristData() {
   dispatcher.dispatch({type: "clear-artists-data"});
 }
 
+// Clears all store data
 export function clearWordCloudStore() {
   dispatcher.dispatch({type: "clear-word-cloud-store"});
 }

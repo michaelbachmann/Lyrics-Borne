@@ -66,56 +66,19 @@ export default class WordCloud extends React.Component {
       return Styles.inputStyle;
     }
   }
-  // Error popup for no results
-  // static popUp(){
-  //   var object = this.refs.myModal;
-  //   object.style.display = "block";
-  //   WordCloudStore.clearWordCloudStore();
-  // }
 
   closePopUp() {
     var object = this.refs.myModal;
     object.style.display = "none";
   }
-
-  // renderCanvas() {
-  //   var mBody = this.refs.modalBody;
-  //   var mCloud = this.refs.currentCloud;
-  //   var mImg = this.refs.canvasImg;
-  //   html2canvas(mCloud, {
-  //     onrendered: function(canvas) {
-  //       var dataURL = canvas.toDataURL();
-  //       mImg.src = dataURL;
-  //       //mBody.appendChild(canvas);
-  //     }
-  //   });
-  //   this.popUp();
-  // }
-
-  // shareFB() {
-  //     FB.ui({
-  //   method: 'share',
-  //   display: 'popup',
-  //   href: 'https://developers.facebook.com/docs/',
-  // }, function(response){});
-  // }
-
-  // dataURItoBlob(dataURI) {
-  //   var byteString = atob(dataURI.split(',')[1]);
-  //   var ab = new ArrayBuffer(byteString.length);
-  //   var ia = new Uint8Array(ab);
-  //   for (var i = 0; i < byteString.length; i++) {
-  //       ia[i] = byteString.charCodeAt(i);
-  //   }
-  //   return new Blob([ab], {type: 'image/png'});
-  // }
-    // Clear word cloud store
+  // Clear word cloud store
   clearWordCloudStore() {
     WordCloudActions.clearWordCloudStore();
   }
   // Calls our rest API to get word cloud data
   reloadWordCloud() {
     WordCloudActions.reloadWordCloud();
+
   }
   // Calls our rest API to get artist data
   queryArtists(query) {
@@ -215,10 +178,12 @@ export default class WordCloud extends React.Component {
 					</span>  Search
 				</button>
 
-        <button class="btn btn-lg" style={Styles.shareButtonStyle} onClick={() => this.popUp()}>
+        <a target="_blank" href="https://www.facebook.com/dialog/feed?app_id=184683071273&link=localhost%3A8888&picture=http%3A%2F%2Fwww.insert-image-share-url-here.jpg&name=Lyrical%20word%20clouds!&caption=%20&description=This%20is%20a%20Facebook%20description.&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" >
+        <button class="btn btn-lg" style={Styles.shareButtonStyle}>
 				 <span class="glyphicon glyphicon-share" aria-hidden="true">
 				 </span>  Share
         </button>
+        </a>
 
 				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud(inputData)}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
