@@ -87,8 +87,10 @@ export default class Styles {
 			margin:"0 auto",
 			borderRadius: "3",
 			width: "470px",
-			border: "2px solid #653CE0"
-		};
-
+			border: "2px solid #653CE0",
+		}
+		static errorStyle = {
+			color: "#AF0000",
+		}
 
 }

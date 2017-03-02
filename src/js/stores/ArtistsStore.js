@@ -20,7 +20,7 @@ class ArtistsStore extends EventEmitter {
 				this.emit("change");
 				break;
       }
-      case "clear-artists-data": {
+      case "clear-artist-store-data": {
         this.artistData = [];
 				this.emit("change");
 				break;

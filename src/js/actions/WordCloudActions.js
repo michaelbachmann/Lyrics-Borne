@@ -1,5 +1,6 @@
 import dispatcher from "../dispatcher";
 import axios from "axios";
+import WordCloudStore from "../stores/WordCloudStore";
 
 // Calls rest API to get artist data from our server
 export function reloadArtistData(query) {
@@ -7,7 +8,6 @@ export function reloadArtistData(query) {
   const convertedQuery = filteredQuery.replace(/ /g,"+");
   axios.get(`http://localhost:8888/server.php?artistName=${convertedQuery}`)
   .then(function (response) {
-    console.log(response);
     dispatcher.dispatch({type: "receive-artists-data", artistData: response.data});
   })
   .catch(function (error) {
@@ -34,6 +34,16 @@ export function reloadWordCloud(artistID) {
 // Updates state to make sure the UI updates correctly after an
 // an artist is selected
 export function artistClicked(artistName) {
+  var artists = WordCloudStore.getAllArtistData();
+  // for (var i = artists.length - 1; i >= 0; i--) {
+  //   if (artists[i] === artistName) {
+  //     console.log(artists[i]);
+  //     setCurrentIndexArtist(i);
+  //     break;
+  //   }
+  // }
+  // console.log("WTF MATE = " + getCurrentIndexArtist());
+  // console.log("currentIndexArtist = " + currentIndexArtist);
   clearAristData();
   reloadInputData(artistName);
 }
@@ -61,4 +71,8 @@ export function clearInputData() {
 // clears artist data in store
 export function clearAristData() {
   dispatcher.dispatch({type: "clear-artists-data"});
+}
+
+export function clearWordCloudStore() {
+  dispatcher.dispatch({type: "clear-word-cloud-store"});
 }

@@ -9,6 +9,7 @@ import ArtistResult from "../components/ArtistResult";
 import { Link, browserHistory } from 'react-router';
 import RandomColor from 'randomcolor';
 import style from "../../styles.css";
+import Popup from 'react-popup';
 var html2canvas = require("html2canvas");
 
 export default class WordCloud extends React.Component {
@@ -62,54 +63,56 @@ export default class WordCloud extends React.Component {
     if (displayResults) {
       return Styles.resultsInputStyle;
     } else {
-      console.log(Styles.inputStyle);
       return Styles.inputStyle;
     }
   }
-  popUp(){
-    var object = this.refs.myModal;
-    object.style.display = "block";
-  }
+  // Error popup for no results
+  // static popUp(){
+  //   var object = this.refs.myModal;
+  //   object.style.display = "block";
+  //   WordCloudStore.clearWordCloudStore();
+  // }
 
   closePopUp() {
     var object = this.refs.myModal;
     object.style.display = "none";
   }
 
-  renderCanvas() {
-    var mBody = this.refs.modalBody;
-    var mCloud = this.refs.currentCloud;
-    var mImg = this.refs.canvasImg;
-    html2canvas(mCloud, {
-      onrendered: function(canvas) {
-        var dataURL = canvas.toDataURL();
-        mImg.src = dataURL;
-        //mBody.appendChild(canvas);
-      }
-    });
-    this.popUp();
+  // renderCanvas() {
+  //   var mBody = this.refs.modalBody;
+  //   var mCloud = this.refs.currentCloud;
+  //   var mImg = this.refs.canvasImg;
+  //   html2canvas(mCloud, {
+  //     onrendered: function(canvas) {
+  //       var dataURL = canvas.toDataURL();
+  //       mImg.src = dataURL;
+  //       //mBody.appendChild(canvas);
+  //     }
+  //   });
+  //   this.popUp();
+  // }
+
+  // shareFB() {
+  //     FB.ui({
+  //   method: 'share',
+  //   display: 'popup',
+  //   href: 'https://developers.facebook.com/docs/',
+  // }, function(response){});
+  // }
+
+  // dataURItoBlob(dataURI) {
+  //   var byteString = atob(dataURI.split(',')[1]);
+  //   var ab = new ArrayBuffer(byteString.length);
+  //   var ia = new Uint8Array(ab);
+  //   for (var i = 0; i < byteString.length; i++) {
+  //       ia[i] = byteString.charCodeAt(i);
+  //   }
+  //   return new Blob([ab], {type: 'image/png'});
+  // }
+    // Clear word cloud store
+  clearWordCloudStore() {
+    WordCloudActions.clearWordCloudStore();
   }
-
-  shareFB() {
-      FB.ui({
-    method: 'share',
-    display: 'popup',
-    href: 'https://developers.facebook.com/docs/',
-  }, function(response){});
-  }
-
-
-
-  dataURItoBlob(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], {type: 'image/png'});
-  }
-
   // Calls our rest API to get word cloud data
   reloadWordCloud() {
     WordCloudActions.reloadWordCloud();
@@ -128,6 +131,7 @@ export default class WordCloud extends React.Component {
   updateInputData(event) {
     WordCloudActions.reloadInputData(event.target.value);
   }
+
   // Checks value of checkbox and rerenders word cloud in grayscale or color
   updateColor(event) {
      const target = event.target;
@@ -161,15 +165,7 @@ export default class WordCloud extends React.Component {
         <div className="modal-content">
           <div className="modal-header">
             <span className="close" id="closeModal" ref="closeModal" onClick={()=>this.closePopUp()}>×</span>
-            <h2>Modal Header</h2>
-          </div>
-          <div className="modal-body" id="modalBody" ref="modalBody">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
-          </div>
-          <div className="modal-footer">
-            <h3>Modal Footer</h3>
-            <img id="canvasImg" ref="canvasImg" alt="Right click to save me!"/>
+            <h3 style={Styles.errorStyle}>Error: No artists with this name found.</h3>
           </div>
         </div>
       </div>
@@ -219,12 +215,12 @@ export default class WordCloud extends React.Component {
 					</span>  Search
 				</button>
 
-        <button class="btn btn-lg" style={Styles.shareButtonStyle} onClick={() => this.shareFB()}>
+        <button class="btn btn-lg" style={Styles.shareButtonStyle} onClick={() => this.popUp()}>
 				 <span class="glyphicon glyphicon-share" aria-hidden="true">
 				 </span>  Share
         </button>
 
-				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud(0)}>
+				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud(inputData)}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>

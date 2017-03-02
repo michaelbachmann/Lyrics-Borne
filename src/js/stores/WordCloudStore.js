@@ -1,6 +1,8 @@
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
+import WordCloud from "../pages/WordCloud";
 
+// index of current artist
 // Stores the state for the word cloud, search results and
 // input data in the search bar
 class WordCloudStore extends EventEmitter {
@@ -26,6 +28,12 @@ class WordCloudStore extends EventEmitter {
 			}
 			case "receive-artists-data": {
 				this.artistData = action.artistData;
+				if (this.artistData.length == 0) {
+					alert("Error: No artists with this name");
+					this.inputData = '';
+					this.artistData = [];
+					this.wordData = [];
+				}
 				this.emit("change");
 				break;
 			}
@@ -46,6 +54,14 @@ class WordCloudStore extends EventEmitter {
 			}
 			case "clear-input-data": {
 				this.inputData = '';
+				this.emit("change");
+				break;
+			}
+			case "clear-word-cloud-store": {
+				this.inputData = '';
+				this.artistData = [];
+				this.wordData = [];
+				dispatcher.dispatch({type:"clear-artist-store-data"});
 				this.emit("change");
 				break;
 			}
