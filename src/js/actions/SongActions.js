@@ -16,7 +16,7 @@ export function reloadSongData(word) {
 
     // Sort objects by count
     arrayOfObjects.sort(function(a,b) {
-      return (a.count > b.count) ? 1 : ((b.count < a.count) ? -1 : 0);} );    
+      return (a.count < b.count) ? 1 : ((b.count > a.count) ? -1 : 0);} );    
 
     // Notify dispatcher we've received the songs list
     dispatcher.dispatch({type: "receive-song-list-data", songData: arrayOfObjects});

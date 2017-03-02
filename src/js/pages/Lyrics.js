@@ -26,7 +26,6 @@ export default class Lyrics extends React.Component {
   // Updates our components state variable by grabbing the stores
   // current version of our state
   getLyricsData() {
-    console.log("get lyrics data in lyrics.js");
     this.setState({
       lyrics: LyricsStore.getAllLyricsData(),
     });
