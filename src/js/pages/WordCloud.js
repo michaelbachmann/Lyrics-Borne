@@ -173,7 +173,7 @@ export default class WordCloud extends React.Component {
 
         <table id="artist-result-table" style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-				<button id="searh-button" class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
+				<button id="search-button" class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">
 					</span>  Search
 				</button>
