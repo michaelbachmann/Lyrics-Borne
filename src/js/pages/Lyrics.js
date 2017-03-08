@@ -43,18 +43,18 @@ export default class Lyrics extends React.Component {
     return (
       <div>
 
-        <h1 style={Styles.titleStyle}>{songID}</h1>
+        <h1 id="lyrics-title" style={Styles.titleStyle}>{songID}</h1>
 
-        <pre style={Styles.lyricsStyle}>
+        <pre id="lyrics-data" style={Styles.lyricsStyle}>
           <Highlight search={word} matchStyle={{backgroundColor:"#ffd54f"}}>{lyrics}</Highlight>
         </pre>
 
-        <button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => {this.props.history.push('/')}}>
+        <button id="lyrics-return-to-search" class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => {this.props.history.push('/')}}>
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
 					</span>  Search
 				</button>
 
-        <button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => {this.props.history.goBack()}}>
+        <button id="lyrics-return-to-songs" class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => {this.props.history.goBack()}}>
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
           </span>  Song List
         </button>

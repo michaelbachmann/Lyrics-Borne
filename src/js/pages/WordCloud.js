@@ -151,7 +151,7 @@ export default class WordCloud extends React.Component {
         </div>
 
         <form>
-        <label>
+        <label id="grayscale-label">
           Grayscale:
           <input
             name="isGrayscale"
@@ -163,7 +163,7 @@ export default class WordCloud extends React.Component {
         </form>
 
         <div class="input-group" style={this.getInputStyle()}>
-          <input type="text" class="form-control "
+          <input id="search-input-box" type="text" class="form-control "
             value={this.state.inputData}
             placeholder="Search artists..."
             aria-describedby="sizing-addon2"
@@ -171,21 +171,21 @@ export default class WordCloud extends React.Component {
           </input>
         </div>
 
-        <table style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
+        <table id="artist-result-table" style={Styles.resultsTableStyle}><tbody>{mappedArtistData}</tbody></table>
 
-				<button class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
+				<button id="searh-button" class="btn btn-lg" style={Styles.searchButtonStyle} onClick={() => this.queryArtists(inputData)}>
 					<span class="glyphicon glyphicon-search" aria-hidden="true">
 					</span>  Search
 				</button>
 
         <a target="_blank" href="https://www.facebook.com/dialog/feed?app_id=184683071273&link=localhost%3A8888&picture=http%3A%2F%2Fwww.insert-image-share-url-here.jpg&name=Lyrical%20word%20clouds!&caption=%20&description=This%20is%20a%20Facebook%20description.&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" >
-        <button class="btn btn-lg" style={Styles.shareButtonStyle}>
+        <button id="share-button" class="btn btn-lg" style={Styles.shareButtonStyle}>
 				 <span class="glyphicon glyphicon-share" aria-hidden="true">
 				 </span>  Share
         </button>
         </a>
 
-				<button class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud(inputData)}>
+				<button id="add-button" class="btn btn-lg" style={Styles.addButtonStyle} onClick={() => this.reloadWordCloud(inputData)}>
 					<span class="glyphicon glyphicon-plus" aria-hidden="true">
 					</span>  Add</button>
 			</div>

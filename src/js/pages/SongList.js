@@ -45,12 +45,12 @@ export default class SongList extends React.Component {
 
     return (
       <div>
-        <h1 style={Styles.titleStyle}>{word}</h1>
+        <h1 id="song-list-title" style={Styles.titleStyle}>{word}</h1>
 
-        <table style={Styles.tableStyle}><tbody>{mappedSongData}</tbody></table>
+        <table id="song-list-table" style={Styles.tableStyle}><tbody>{mappedSongData}</tbody></table>
 
         <Link to={`/`}>
-      	<button class="btn btn-lg" style={Styles.searchButtonStyle}>
+      	<button id="song-list-return-to-search" class="btn btn-lg" style={Styles.searchButtonStyle}>
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
 					</span>  Search
 				</button>

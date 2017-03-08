@@ -32,11 +32,11 @@ export default class SongResult extends React.Component {
     return (
     		<tr style={rowStyle}>
         	<td style={songColumnStyle}>
-                <Link to={urlStr} onClick={()=>LyricsActions.reloadLyricsData(songStr, artist)} originalword={word}>
+                <Link to={urlStr} className="song-result" onClick={()=>LyricsActions.reloadLyricsData(songStr, artist)} originalword={word}>
                     {songStr}
                     </Link>
             </td>
-        	<td style={countColumnStyle}>{count}</td>
+        	<td className="song-result-count" style={countColumnStyle}>{count}</td>
         </tr>
     );
   }
