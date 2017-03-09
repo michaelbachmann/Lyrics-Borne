@@ -34,7 +34,7 @@ Feature: Artist Search Bar
 		Given I am on "/"
 		And the search bar contains "Everest"
 		When I click the "search-button" button
-		Then a drop-down menu will show below the Search Bar with suggestions		
+		Then a drop-down menu will show below the Search Bar with suggestions
 
 	@javascript
 	Scenario: Artist name is spelled correctly

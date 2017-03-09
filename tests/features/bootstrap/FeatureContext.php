@@ -88,7 +88,6 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
         $this->page = $this->getSession()->getPage();
         $this->searchInputField = $this->page->findField('search-input-box');
         $this->searchInputField->setValue($arg1);
-        // throw new PendingException();
     }
 
     /**
@@ -96,7 +95,8 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function aDropDownMenuWillShowBelowTheSearchBarWithSuggestions()
     {
-        throw new PendingException();
+        // $this->page
+        
     }
 
     /**
@@ -104,7 +104,9 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function iClickTheButton($arg1)
     {
-        $this->page->getById($arg1)->rightClick();
+        $searchButton = $this->page->getById($arg1);
+        assertNotNull($searchButton);
+        $searchButton->rightClick();
     }
 
     /**
