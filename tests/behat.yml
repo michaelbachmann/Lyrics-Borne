@@ -1,8 +1,10 @@
 # behat.yml
 default:
-  extensions:
-    Behat\MinkExtension:
-      base_url: 'http://localhost:8080'
-      browser_name: 'chrome'
-      goutte: ~
-      selenium2: ~
+  suites:
+    default:
+      extensions:
+        Behat\MinkExtension:
+          base_url: 'http://localhost:8080'
+          browser_name: 'chrome'
+          goutte: ~
+          selenium2: ~

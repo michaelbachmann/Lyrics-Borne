@@ -37,3 +37,7 @@ jspm_packages
 .node_repl_history
 
 /vendor/
+tests/composer.lock
+tests/composer.phar
+tests/selenium-server-standalone-3.2.0.jar
+.eslintrc.json
