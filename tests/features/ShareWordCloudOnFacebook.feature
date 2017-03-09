@@ -3,13 +3,14 @@ Feature: Share Word Cloud on Facebook
 
 	@javascript
 	Scenario: Image is created from the Word Cloud. 
-		Given a word cloud for “Kendrick Lamar” is generated 
+		Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		When I clicked the Share Button
 		Then a popup will produce share to Facebook link
 
 	@javascript
 	Scenario: No word cloud is present.
-		Given a word cloud for “Kendrick Lamar” is not generated 
+		Given I am on "/"	 
 		When I clicked the Share Button
 		Then nothing will happen
 
@@ -21,7 +22,7 @@ Feature: Share Word Cloud on Facebook
 		Then I should be logged into Facebook to share it 
 
 	@javascript
-	Scenario: I do not  have a Facebook account.
+	Scenario: I do not have a Facebook account.
 		Given a word cloud for “Kendrick Lamar” is generated 
 		And I clicked the Share Button
 		When I am do not own a Facebook account

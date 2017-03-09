@@ -49,39 +49,46 @@ Feature: Generate Word Cloud
 
 	@javascript
 	Scenario: The Word Cloud omits STOP words (commonly used words)
-		Given a word cloud for "Kendrick Lamar" is generated
+		Given I am on "/" 
+		And a word cloud for "Kendrick Lamar" is generated
 		Then the STOP words will be removed from the list before the Word Cloud is generated
 
 	@javascript
 	Scenario: The Word Cloud contains a maximum of 250 words
-		Given a word cloud for "Kendrick Lamar" is generated
+	  Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		Then the other words above the 250 limit will be truncated
 
 	@javascript
 	Scenario: The Word Cloud is rectangular
-		Given a word cloud for "Kendrick Lamar" is generated
+	  Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		When the words are populating the Word Cloud 
 		Then the overall shape of the Word Cloud will be rectangular
 
 	@javascript
 	Scenario: The Word Cloud is colorful
-		Given a word cloud for "Kendrick Lamar" is generated
+		Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		When they check the color box setting 
 		Then the Word Cloud will be colorful
 
 	@javascript
 	Scenario: The size of the words in Word Cloud should be proportional to the frequency of the word’s occurrence
-		Given a word cloud for "Kendrick Lamar" is generated
+		Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		Then the size of the words will be dependent on the frequency of the word
 
 	@javascript
 	Scenario: When an additional artist is searched and clicked, their data is added to the Word Cloud
-		Given a word cloud for "Kendrick Lamar" is generated
+		Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		And the search bar contains "Drake" 
 		When the Add Button is clicked
 		Then the Word Cloud will regenerate itself to include the words from the new selected Artist 
 
 	@javascript
 	Scenario: The Word Cloud is generated within 1 second
-		Given a word cloud for "Kendrick Lamar" is generated
+		Given I am on "/"	 
+		And a word cloud for "Kendrick Lamar" is generated
 		Then I will only have to wait 1 second before the Word Cloud has been generated 
