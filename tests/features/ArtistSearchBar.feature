@@ -11,8 +11,8 @@ Feature: Artist Search Bar
 	@javascript
 	Scenario: Search Bar clicked from Word Cloud Page.
 		Given I am on "/"
-		And the search bar contains ""
-		When I begin typing in an Artist’s name
+		And the search bar is empty
+		When I begin typing in an "an artists" name
 		Then a drop-down menu will show below the Search Bar with suggestions		
 
 	@javascript

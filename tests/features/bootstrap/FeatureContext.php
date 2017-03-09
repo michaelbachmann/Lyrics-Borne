@@ -63,8 +63,8 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
     {
         $this->session = $this->getSession()->wait(5000,null);
         $this->page = $this->getSession()->getPage();
-        $this->searchInputField = $this->page->findById('search-input-box');
-        echo $this->searchInputField->getHtml();
+        $this->searchInputField = $this->page->findField('search-input-box');
+        assertEquals($this->searchInputField->getValue(), "");
     }
 
     /**
@@ -72,15 +72,23 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theSearchBarContains($arg1)
     {
-        throw new PendingException();
+        $this->session = $this->getSession()->wait(5000,null);
+        $this->page = $this->getSession()->getPage();
+        $this->searchInputField = $this->page->findField('search-input-box');
+
+        // throw new PendingException();
     }
 
     /**
-     * @When /^I begin typing in an Artist’s name$/
+     * @When /^I begin typing in an "([^"]*)" name$/
      */
-    public function iBeginTypingInAnArtistSName()
+    public function iBeginTypingInAnName($arg1)
     {
-        throw new PendingException();
+        $this->session = $this->getSession()->wait(5000,null);
+        $this->page = $this->getSession()->getPage();
+        $this->searchInputField = $this->page->findField('search-input-box');
+        $this->searchInputField->setValue($arg1);
+        // throw new PendingException();
     }
 
     /**
@@ -96,7 +104,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function iClickTheButton($arg1)
     {
-        throw new PendingException();
+        $this->page->getById($arg1)->rightClick();
     }
 
     /**
