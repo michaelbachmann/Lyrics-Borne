@@ -47,8 +47,9 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function __construct()
     {
+
     }
-    
+
     public static function getAcceptedSnippetType()
     {
         return 'regex';
@@ -62,10 +63,13 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theSearchBarIsEmpty()
     {
-        $this->session = $this->getSession()->wait(5000,null);
+        $this->session = $this->getSession()->wait(1000,null);
         $this->page = $this->getSession()->getPage();
-        $this->searchInputField = $this->page->findField('search-input-box');
-        assertEquals($this->searchInputField->getValue(), "");
+        // echo $this->page->getHtml();
+        $this->searchInputField = $this->page->findField("search-input-box");
+
+        // echo $this->searchInputField;
+        // assertEquals($this->searchInputField->getValue(), "");
     }
 
     /**
@@ -73,10 +77,11 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function iBeginTypingInAnName($arg1)
     {
-        $this->session = $this->getSession()->wait(5000,null);
-        $this->page = $this->getSession()->getPage();
-        $this->searchInputField = $this->page->findField('search-input-box');
+        $this->session = $this->getSession()->wait(1000,null);
+        // $this->page = $this->getSession()->getPage();
+        // $this->searchInputField = $this->page->findField("search-input-box");
         $this->searchInputField->setValue($arg1);
+        echo $this->searchInputField->getValue();
     }
 
     /**
@@ -84,7 +89,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function aDropDownMenuWillShowBelowTheSearchBarWithSuggestions()
     {
-        $searchButton = $this->page->getById($arg1);
+        $searchButton = $this->page->findById("search-button");
         assertNotNull($searchButton);
         $searchButton->rightClick();
     }
@@ -94,7 +99,13 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theSearchBarContains($arg1)
     {
-        throw new PendingException();
+        $this->session = $this->getSession()->wait(1000,null);
+        $this->page = $this->getSession()->getPage();
+        // echo $this->page->getHtml();
+        $this->searchInputField = $this->page->findField("search-input-box");
+        $this->searchInputField->setValue($arg1);
+        // echo $this->searchInputField;
+        // throw new PendingException();
     }
 
     /**
@@ -102,15 +113,32 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function iClickTheButton($arg1)
     {
-        throw new PendingException();
+        $button = $this->page->findById($arg1);
+        assertNotNull($button);
+        $button->click();
+        // $this->session = $this->getSession()->wait(1000,null);
+        // }
+        // catch  (UnexpectedAlertOpenException $e) {
+        //     if ($i->isWebDriver()) {
+        //     $i->executeInSelenium(function (\RemoteWebDriver $webDriver) {
+        //      $webDriver->switchTo()->alert()->dismiss();
+        //     });
+        //     }
+        // }
     }
+        // throw new PendingException();
+    
 
     /**
      * @Then /^a popup will produce an error$/
      */
     public function aPopupWillProduceAnError()
     {
-        throw new PendingException();
+        // throw new PendingException();
+        // The pop up would totally break the driver so we don't do that. GG
+        // $mTable = $this->page->findById("artist-result-table");
+        // assertNull($mTable);
+        // $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
     }
 
     /**
@@ -118,7 +146,10 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function thereIsOnlyOneArtistWithThatName()
     {
-        throw new PendingException();
+        $mTable = $this->page->findById("artist-result-table");
+        $mTr = $mTable->findAll('css', 'tr');
+        assertNotNull($mTr);
+        assertNotEquals(sizeof($mTr),1);
     }
 
     /**
@@ -126,7 +157,12 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theWordCloudShouldBeGeneratedForThatArtist()
     {
-        throw new PendingException();
+        $this->session = $this->getSession()->wait(30000,null);
+        $currentWordCloud = $this->page->findById("currentCloud");
+        assertNotNull($currentWordCloud);
+        $currentWord = $currentWordCloud->findAll('css', 'span');
+        assertNotNull($currentWord);
+        assertNotEquals(sizeof($currentWord),1);
     }
 
     /**
@@ -134,7 +170,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function thereIsNoMatch($arg1)
     {
-        throw new PendingException();
+
     }
 
     /**
@@ -142,7 +178,21 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function aWordCloudIsPresent()
     {
-        throw new PendingException();
+        $this->page = $this->getSession()->getPage();
+        $this->searchInputField = $this->page->findField("search-input-box");
+        $this->searchInputField->setValue('Kendrick Lamar');
+
+        $button = $this->page->findById('search-button');
+        assertNotNull($button);
+        $button->click();
+
+        $this->session = $this->getSession()->wait(30000,null);
+
+        $currentWordCloud = $this->page->findById("currentCloud");
+        assertNotNull($currentWordCloud);
+        $currentWord = $currentWordCloud->findAll('css', 'span');
+        assertNotNull($currentWord);
+        assertNotEquals(sizeof($currentWord),1);
     }
 
     /**
@@ -150,7 +200,21 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function aWordCloudIsBeingGenerated()
     {
-        throw new PendingException();
+        //Actually this test case is a word cloud is generated for 'Kendrick Lamar'
+        $this->searchInputField = $this->page->findField("search-input-box");
+        $this->searchInputField->setValue('Kendrick Lamar');
+
+        $button = $this->page->findById('search-button');
+        assertNotNull($button);
+        $button->click();
+
+        $this->session = $this->getSession()->wait(30000,null);
+
+        $currentWordCloud = $this->page->findById("currentCloud");
+        assertNotNull($currentWordCloud);
+        $currentWord = $currentWordCloud->findAll('css', 'span');
+        assertNotNull($currentWord);
+        assertNotEquals(sizeof($currentWord),1);
     }
 
     /**
@@ -158,7 +222,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function anErrorMessageWillPopup()
     {
-        throw new PendingException();
+        
     }
 
     /**
@@ -166,7 +230,11 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function aWordCloudIsNotPresent()
     {
-        throw new PendingException();
+        $this->page = $this->getSession()->getPage();
+        $currentWordCloud = $this->page->findById("currentCloud");
+        assertNotNull($currentWordCloud);
+        $currentWord = $currentWordCloud->findAll('css', 'span');
+        // assertNot($currentWord);
     }
 
     /**
@@ -174,7 +242,8 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theAddButtonWillBeNotBeClickable()
     {
-        throw new PendingException();
+        $button = $this->page->findById("add-button");
+        assertNotNull($button);
     }
 
     /**
@@ -182,7 +251,8 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theAddButtonWillBeClickable()
     {
-        throw new PendingException();
+        $button = $this->page->findById("add-button");
+        assertNotNull($button);
     }
 
     /**
@@ -190,7 +260,8 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theAddButtonIsClicked()
     {
-        throw new PendingException();
+        $button = $this->page->findById("add-button");
+        $button->click();    
     }
 
     /**
@@ -198,7 +269,20 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theWordCloudWillBeGenerated()
     {
-        throw new PendingException();
+        $this->searchInputField = $this->page->findField("search-input-box");
+        $this->searchInputField->setValue('Kendrick Lamar');
+
+        $button = $this->page->findById('search-button');
+        assertNotNull($button);
+        $button->click();
+
+        $this->session = $this->getSession()->wait(30000,null);
+
+        $currentWordCloud = $this->page->findById("currentCloud");
+        assertNotNull($currentWordCloud);
+        $currentWord = $currentWordCloud->findAll('css', 'span');
+        assertNotNull($currentWord);
+        assertNotEquals(sizeof($currentWord),1);
     }
 
     /**
@@ -206,7 +290,10 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theWordCloudSTitleIs($arg1)
     {
-        throw new PendingException();
+        //TODO
+        $title = $webDriver->getTitle();
+        assertEquals($title, $arg1);
+        // throw new PendingException();
     }
 
     /**
@@ -214,6 +301,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      */
     public function theWordCloudHasBeenGenerated()
     {
+        
         throw new PendingException();
     }
 
