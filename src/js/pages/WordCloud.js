@@ -156,6 +156,7 @@ export default class WordCloud extends React.Component {
           <input
             name="isGrayscale"
             type="checkbox"
+            id="grayscale-checkbox"
             defaultChecked={isColor}
             checked={this.state.isGrayscale}
             onChange={this.updateColor} />

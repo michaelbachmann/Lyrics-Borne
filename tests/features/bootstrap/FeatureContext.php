@@ -14,6 +14,30 @@ require_once './vendor/autoload.php';
  */
 class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements Context, Behat\Behat\Context\CustomSnippetAcceptingContext
 {
+    // cause
+    private $session;
+    private $page;
+    // element ID's
+    private $searchInputField;
+    private $currentCloud; // also has a class of word-cloud
+    private $grayscaleLabel;
+    private $grayscaleCheckbox;
+    private $artistResultTable;
+    private $searchButton;
+    private $shareButton;
+    private $addButton;
+    private $songListTitle;
+    private $songListTable;
+    private $songListReturnToSearch;
+    private $lyricsTitle;
+    private $lyricsData;
+    private $lyricsReturnToSearch;
+    private $lyricsReturnToSongs;
+    // element classes
+    private $artistResult;
+    private $artistImage;
+    private $songResult;
+    private $songResultCount;
     /**
      * Initializes context.
      *
@@ -30,19 +54,23 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
         return 'regex';
     }
 
+
+
     /**
-     * @Given /^I am on “\/”$/
+     * @Then /^the search bar is empty$/
      */
-    public function iAmOn()
+    public function theSearchBarIsEmpty()
     {
-         assertEquals("dick", "pussy");
-        // throw new PendingException();
+        $this->session = $this->getSession()->wait(5000,null);
+        $this->page = $this->getSession()->getPage();
+        $this->searchInputField = $this->page->findById('search-input-box');
+        echo $this->searchInputField->getHtml();
     }
 
     /**
-     * @Then /^the search bar contains “”$/
+     * @Given /^the search bar contains "([^"]*)"$/
      */
-    public function theSearchBarContains()
+    public function theSearchBarContains($arg1)
     {
         throw new PendingException();
     }
@@ -64,9 +92,9 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
     }
 
     /**
-     * @When /^I click the “search-button” button$/
+     * @When /^I click the "([^"]*)" button$/
      */
-    public function iClickTheSearchButtonButton()
+    public function iClickTheButton($arg1)
     {
         throw new PendingException();
     }
@@ -75,30 +103,6 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      * @Then /^a popup will produce an error$/
      */
     public function aPopupWillProduceAnError()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given /^the search bar contains “Kedrik Lamar”$/
-     */
-    public function theSearchBarContainsKedrikLamar()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given /^the search bar contains “Everest”$/
-     */
-    public function theSearchBarContainsEverest()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given /^the search bar contains “Kendrick Lamar”$/
-     */
-    public function theSearchBarContainsKendrickLamar()
     {
         throw new PendingException();
     }
@@ -120,17 +124,9 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
     }
 
     /**
-     * @Given /^the search bar contains “Kendrick”$/
+     * @Given /^there is no match "([^"]*)"$/
      */
-    public function theSearchBarContainsKendrick()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given /^there is no match “Kendrick”$/
-     */
-    public function thereIsNoMatchKendrick()
+    public function thereIsNoMatch($arg1)
     {
         throw new PendingException();
     }
@@ -139,14 +135,6 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements 
      * @Given /^a word cloud is present$/
      */
     public function aWordCloudIsPresent()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given /^the search bar contains “Metallica”$/
-     */
-    public function theSearchBarContainsMetallica()
     {
         throw new PendingException();
     }
